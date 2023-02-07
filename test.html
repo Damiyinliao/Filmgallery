@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: space-around;
+        }
+        #underline a{
+            /* //去除A标签原来的下滑线 */
+            text-decoration: none;
+        }
+
+        #underline {
+            margin: 24px;
+            position: relative;
+            float: left;
+
+        }
+
+        /* //这里涉及到css的伪类和伪元素的使用
+        //:after是一个伪元素，是在#underline的div标签之后要添加的内容
+        //transition: 0.8s;声明加载此样式的过渡时间
+        //意思就是在ID为underline的div之后添加一个div内容块，内容为空（就是一个空的div），
+        设置这个伪元素的高度为下划线的高度，宽度为零（就是添加的伪元素不能显示出来，可是存在，
+        因为 position: absolute，所以这个元素不占任何数据流位置），
+        因为设置下划线为从中间开始向延伸过渡呈现，
+        所以设置这个伪元素的开始位置为left：50%；父类的中间位置。 */
+        #underline:after {
+            content: "";
+            width: 0px;
+            height: 3px;
+            background: #007ee6;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            right: 50%;
+            transition: all .5s;
+        }
+
+        /* //:hover是一个伪类，相当于#underline的响应事件：
+        //如:hover  鼠标停留在该标签时触发的事件，将加载该类
+        //:focus 获得焦点事件（鼠标点击在该标签上），将选择该类或者该ID
+        //当underline对应的标签触发鼠标:hover事件
+        ：刚刚加的：after伪元素将会选着新的css样式（伪类），
+        将跟父类的left距离改为25%（向左延伸），长度改为50%，（向右延伸） */
+        #underline:hover:after {
+            left: 25%;
+            right: 25%;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="underline"><a href="">Home</a></div>
+    <div id="underline"><a href="">About</a></div>
+    <div id="underline"><a href="">Solutions</a></div>
+    <div id="underline"><a href="">SignIn</a></div>
+</body>
+
+</html>
