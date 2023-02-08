@@ -1,4 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
+// 引入element-plus之后需在webpack.config.js中配置
+// webpack.config.js
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
 module.exports = defineConfig({
   transpileDependencies: true,
   //关闭语法检查
@@ -12,5 +18,14 @@ module.exports = defineConfig({
       entry: 'src/main.js', // 入口文件
       title: '胶片社区网|filmgallery'
     }
-  }
+  },
+  // element-plus
+  plugins: [
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
 })

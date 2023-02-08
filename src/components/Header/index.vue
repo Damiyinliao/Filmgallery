@@ -1,24 +1,26 @@
 <template>
-    <header class="header">
+    <header id="header">
         <!-- 头部第一块，Logo展示 -->
         <div class="logo">
             <img src="./images/film-logo.png" alt="胶片社区网">
+            <!-- <span>Filmgallery</span> -->
         </div>
         <!-- 头部第二块，主要导航点 -->
-        <div class="nav">
-            <ul>
-                <li><a class="nav-item" href="">首页</a></li>
-                <li><a class="nav-item" href="">富士模拟胶片</a></li>
-                <li><a class="nav-item" href="">发现</a></li>
-                <li><a class="nav-item" href="">胶片机</a></li>
-            </ul>
-        </div>
+        <ul class="nav">
+            <li><router-link to="/home" class="nav-item" >首页</router-link></li>
+            <li><router-link to="/film" class="nav-item" >胶片</router-link></li>
+            <li><router-link to="/fujifilm" class="nav-item" >胶片模拟</router-link></li>
+            <li><router-link to="/camera" class="nav-item" >胶片机</router-link></li>
+        </ul>
         <!-- 头部第三块：搜索框，收藏，个人登录模块  -->
-        <div class="right">
-            <div class="search"><input type="text" value="搜索"></div>
-            <div class="favorite"><a href="">收藏</a></div>
-            <div class="account"><a href="">账户</a></div>
-        </div>
+        <!-- 考虑到小屏幕上看，ul 分为两块，小屏幕时，第二块ul不展示 -->
+        <ul class="right">
+            <li class="search">
+                <input type="text" value="搜索" class="search-query">
+            </li>
+            <li class="favorite"><router-link to="/like" href=""><img src="./images/heart1.png" alt="喜欢"></router-link></li>
+            <li class="account"><router-link to="/account"><img src="./images/account.png" alt="账户"></router-link></li>
+        </ul>
     </header>
 </template>
 
@@ -28,12 +30,11 @@ export default {
     setup() {
 
     }
-
 }
 </script>
 
 <style scoped lang="less">
-.header {
+#header {
     position: fixed;
     top: 0;
     width: 100%;
@@ -59,18 +60,13 @@ export default {
     }
 
     .nav {
-        width: 400px;
-    }
-
-    .nav>ul {
         display: flex;
         justify-content: space-between;
         height: 35px;
         align-items: center;
-
+        width: 400px;
         .nav-item {
             position: relative;
-            // margin: 10px;
         }
 
         .nav-item:after {
@@ -94,6 +90,32 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        .search-query{
+            height: 30px;
+            line-height: 30px;
+            box-sizing: border-box;
+            padding: 0 15px 0 30px;
+            border: 1px solid #e3e3e3;
+            color: #273849;
+            outline: none;
+            border-radius: 15px;
+            margin-right: 10px;
+            transition: border-color 0.2s ease;
+            background: #fff url(./images/search2.png) 8px 5px no-repeat;
+            background-size: 20px;
+            vertical-align: middle !important;
+        }
+        .favorite{
+            margin-right: 10px;
+            img{
+                height: 30px;
+            }
+        }
+        .account{
+            img{
+                height: 25px;
+            }
+        }
     }
 }
 </style>
