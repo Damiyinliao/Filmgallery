@@ -16,7 +16,7 @@
         <!-- 考虑到小屏幕上看，ul 分为两块，小屏幕时，第二块ul不展示 -->
         <ul class="right">
             <li class="search">
-                <input type="text" value="搜索" class="search-query">
+                <input type="text" value="搜索" class="search-query" >
             </li>
             <li class="favorite"><router-link to="/like" href=""><img src="./images/heart1.png" alt="喜欢"></router-link></li>
             <li class="account"><router-link to="/account"><img src="./images/account.png" alt="账户"></router-link></li>
@@ -25,11 +25,15 @@
 </template>
 
 <script>
+import { onMounted } from '@vue/runtime-core'
+import router from '@/router';
 export default {
     name: 'Header',
     setup() {
-
-    }
+        // onMounted(()=>{
+        //     console.log(router);
+        // })
+    },
 }
 </script>
 

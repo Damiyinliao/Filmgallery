@@ -8,12 +8,21 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { onMounted } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
 export default {
   name: 'App',
   components: {
     Header,
     Footer
-  }
+  },
+  setup() {
+    // let router = useRouter
+    // onMounted(()=>{
+    //   console.log("这里是App组件", router.currentRoute.value);
+    // })
+  },
+  
 }
 </script>
 

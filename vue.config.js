@@ -19,13 +19,16 @@ module.exports = defineConfig({
       title: '胶片社区网|filmgallery'
     }
   },
-  // element-plus
-  plugins: [
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
-  ],
+  configureWebpack: {
+    // element-plus
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
+  }
+  
 })
