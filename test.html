@@ -7,61 +7,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        .main{
+            width: 335px;
+            height: 700px;
+
+        }
+        .film-card{
+            height: auto;
+            padding-top: 18px;
+            padding-bottom: 15px;
             display: flex;
-            justify-content: space-around;
-        }
-        #underline a{
-            /* //去除A标签原来的下滑线 */
-            text-decoration: none;
-        }
-
-        #underline {
-            margin: 24px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* color: var(--grey-dark); */
             position: relative;
-            float: left;
-
         }
-
-        /* //这里涉及到css的伪类和伪元素的使用
-        //:after是一个伪元素，是在#underline的div标签之后要添加的内容
-        //transition: 0.8s;声明加载此样式的过渡时间
-        //意思就是在ID为underline的div之后添加一个div内容块，内容为空（就是一个空的div），
-        设置这个伪元素的高度为下划线的高度，宽度为零（就是添加的伪元素不能显示出来，可是存在，
-        因为 position: absolute，所以这个元素不占任何数据流位置），
-        因为设置下划线为从中间开始向延伸过渡呈现，
-        所以设置这个伪元素的开始位置为left：50%；父类的中间位置。 */
-        #underline:after {
-            content: "";
-            width: 0px;
-            height: 3px;
-            background: #007ee6;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            right: 50%;
-            transition: all .5s;
-        }
-
-        /* //:hover是一个伪类，相当于#underline的响应事件：
-        //如:hover  鼠标停留在该标签时触发的事件，将加载该类
-        //:focus 获得焦点事件（鼠标点击在该标签上），将选择该类或者该ID
-        //当underline对应的标签触发鼠标:hover事件
-        ：刚刚加的：after伪元素将会选着新的css样式（伪类），
-        将跟父类的left距离改为25%（向左延伸），长度改为50%，（向右延伸） */
-        #underline:hover:after {
-            left: 25%;
-            right: 25%;
-            width: 50%;
-        }
+        .film-info{
+                display: grid;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: 50% 50%;
+                width: 100%;
+                margin-left: 45px;
+                margin-top: 8px;
+            }
+            .film-info div{
+                color: #141414;
+                font-size: .95em;
+                margin-bottom: -15px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .film-info div img{
+                width: 22px;
+                height: auto!important;
+                margin-right: 8px;
+                opacity: .7;
+                margin-top: 20px;
+            }
+            .film-info div span{
+                color: #141414;
+                font-weight: 300;
+                font-size: 1.05em;
+                margin-left: 5px;
+            }
     </style>
 </head>
 
 <body>
-    <div id="underline"><a href="">Home</a></div>
-    <div id="underline"><a href="">About</a></div>
-    <div id="underline"><a href="">Solutions</a></div>
-    <div id="underline"><a href="">SignIn</a></div>
+    <div class="main">
+        <div class="film-card">
+            <div class="film-info">
+                <div>
+                    <img src="./src/views/Panel/images/movie.png" alt="">
+                    <span>Color Negative</span>
+                </div>
+                <div>
+                    <img src="./src/views/Panel/images/organization.png" alt="">
+                    <span>Fujifilm</span>
+                </div>
+                <div>
+                    <img src="./src/views/Panel/images/movie.png" alt="">
+                    <span>35mm</span>
+                </div>
+                <div>
+                    <img src="./src/views/Panel/images/movie.png" alt="">
+                    <span>ABC</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

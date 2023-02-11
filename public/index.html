@@ -7,7 +7,9 @@
     <link rel="icon" href="<%= BASE_URL %>film.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- 重置css -->
-    <link rel="stylesheet" href="reset.css">
+    <!-- 以下该写法长时间运行会报错，不建议这样写 -->
+    <!-- <link rel="stylesheet" href="reset.css"> -->
+    <link rel="stylesheet" href="<%= BASE_URL %>reset.css">
   </head>
   <body>
     <noscript>

@@ -7,13 +7,20 @@ import store from './store'
 // 引入mock数据
 import '@/mock'
 
-//引入所有请求API
+// 引入所有请求API
 import * as API from '@/api'
+// 引入undraw-ui以及相关样式
+// import UndrawUi from 'undraw-ui'
+// import 'undraw-ui/dist/style.css'
 
-
+// 引入SearchBox组件将其注册为全局组件
+import SearchBox from '@/components/SearchBox'
 const app = createApp(App);
+// 配置全局请求API
 app.config.globalProperties.$API = API;
 app.use(router);
 app.use(store);
-app.component(ElSelect.name, ElSelect)
+app.component(ElSelect.name, ElSelect);
+app.component(SearchBox, SearchBox);
+// app.use(UndrawUi)
 app.mount('#app')

@@ -1,86 +1,198 @@
 [
-      {
-        "id": 1,
-        "imgurl":"/film-images/fuji-c200.jpg",
-        "title":"富士C200",
-        "type":"彩负",
-        "iso": 200
-      },
-      {
-        "id": 2,
-        "imgurl":"/film-images/fuji-100.png",
-        "title":"富士业务100",
-        "type": "彩负",
-        "iso": 100
-      },
-      {
-        "id": 3,
-        "imgurl":"/film-images/fuji-C100.png",
-        "title":"富士C100",
-        "type": "彩负",
-        "iso": 100
-      },
-      {
-        "id": 4,
-        "imgurl":"/film-images/fuji-pro400h.jpg",
-        "title":"富士PRO400h",
-        "type": "彩负",
-        "iso": 400
-      },
-      {
-        "id": 5,
-        "imgurl":"/film-images/fuji-superia-xtra-400.jpg",
-        "title":"富士X-tra400",
-        "type": "彩负",
-        "iso": 400
-      },
-      {
-        "id": 6,
-        "imgurl":"/film-images/fuji-provia100f.jpg",
-        "title":"富士Provia100f",
-        "type": "彩负",
-        "iso": 100
-      },
-      {
-        "id": 7,
-        "imgurl":"/film-images/fuji-velvia50.jpg",
-        "title":"富士velvia50",
-        "type": "彩负",
-        "iso": 50
-      },
-      {
-        "id": 8,
-        "imgurl":"/film-images/fuji-velvia-100.jpg",
-        "title":"富士velvia100",
-        "type": "彩负",
-        "iso": 100
-      },
-      {
-        "id": 9,
-        "imgurl":"/film-images/fuji-superia200.jpg",
-        "title":"富士superia200",
-        "type": "彩负",
-        "iso": 200
-      },
-      {
-        "id": 10,
-        "imgurl":"/film-images/fuji-superia-xtra-800.jpg",
-        "title":"富士X-tra800",
-        "type": "彩负",
-        "iso": 800
-      },
-      {
-        "id": 11,
-        "imgurl":"/film-images/fuji-neopan-400cn.jpg",
-        "title":"富士Neopan400",
-        "type": "彩负",
-        "iso": 400
-      },
-      {
-        "id": 12,
-        "imgurl":"/film-images/fuji-neopan-acros-100.jpg",
-        "title":"富士NeopanAcros100",
-        "type": "黑白",
-        "iso": 100
-      }
+  {
+    "id": "fuji-c200",
+    "imgurl": "/film-images/fuji-c200.jpg",
+    "name": "富士C200",
+    "type": "彩负",
+    "iso": 200,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": "fuji-100",
+    "imgurl": "/film-images/fuji-100.png",
+    "name": "富士业务100",
+    "type": "彩负",
+    "iso": 100,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": "fuji-c100",
+    "imgurl": "/film-images/fuji-C100.png",
+    "name": "富士C100",
+    "type": "彩负",
+    "iso": 100,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 4,
+    "imgurl": "/film-images/fuji-pro400h.jpg",
+    "name": "富士PRO400h",
+    "type": "彩负",
+    "iso": 400,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 5,
+    "imgurl": "/film-images/fuji-superia-xtra-400.jpg",
+    "name": "富士X-tra400",
+    "type": "彩负",
+    "iso": 400,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 6,
+    "imgurl": "/film-images/fuji-provia100f.jpg",
+    "name": "富士Provia100f",
+    "type": "彩负",
+    "iso": 100,
+    "brand": "Fujifilm"
+  },
+  {
+    "id": 7,
+    "imgurl": "/film-images/fuji-velvia50.jpg",
+    "name": "富士velvia50",
+    "type": "彩负",
+    "iso": 50,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 8,
+    "imgurl": "/film-images/fuji-velvia-100.jpg",
+    "name": "富士velvia100",
+    "type": "彩负",
+    "iso": 100,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 9,
+    "imgurl": "/film-images/fuji-superia200.jpg",
+    "name": "富士superia200",
+    "type": "彩负",
+    "iso": 200,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 10,
+    "imgurl": "/film-images/fuji-superia-xtra-800.jpg",
+    "name": "富士X-tra800",
+    "type": "彩负",
+    "iso": 800,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 11,
+    "imgurl": "/film-images/fuji-neopan-400cn.jpg",
+    "name": "富士Neopan400",
+    "type": "彩负",
+    "iso": 400,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 12,
+    "imgurl": "/film-images/fuji-neopan-acros-100.jpg",
+    "name": "富士NeopanAcros100",
+    "type": "黑白",
+    "iso": 100,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 13,
+    "imgurl": "/film-images/fuji-natura-1600.png",
+    "name": "富士Natura1600",
+    "type": "彩负",
+    "iso": 1600,
+    "brand": "Fujifilm",
+    "typeName": "ColorNegative"
+  },
+  {
+    "id": 31,
+    "imgurl": "/film-images/kodak-gold-200.jpg",
+    "name": "柯达金200",
+    "type": "彩负",
+    "iso": 200,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 32,
+    "imgurl": "/film-images/kodak-colorplus-200.jpg",
+    "name": "柯达CP200",
+    "type": "彩负",
+    "iso": 200,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 33,
+    "imgurl": "/film-images/kodak-portra-160.jpg",
+    "name": "柯达炮塔160",
+    "type": "彩负",
+    "iso": 160,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 34,
+    "imgurl": "/film-images/kodak-portra-400.jpg",
+    "name": "柯达炮塔400",
+    "type": "彩负",
+    "iso": 400,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 35,
+    "imgurl": "/film-images/kodak-ultramax-400.jpg",
+    "name": "柯达全能400",
+    "type": "彩负",
+    "iso": 400,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 36,
+    "imgurl": "/film-images/kodak-proimage-100.jpg",
+    "name": "柯达人像100",
+    "type": "彩负",
+    "iso": 100,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 37,
+    "imgurl": "/film-images/kodak-t-max-100.jpg",
+    "name": "柯达TMax100",
+    "type": "黑白",
+    "iso": 400,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  },
+  {
+    "id": 38,
+    "imgurl": "/film-images/kodak-ektachrome-e100.jpg",
+    "name": "柯达E100",
+    "type": "反转片",
+    "iso": 100,
+    "brand": "Kodak",
+    "typeName": "ColorNegative",
+    "tag": "热门"
+  }
 ]

@@ -75,7 +75,8 @@ a:link:hover{
 body {
     font-size: 1rem;
     color: #304455;
-    background-color: #FBFBFD;
+    /* background-color: #FBFBFD; */
+    background-color: #f8f8f8;
     width: 100vw!important;
     max-width: 100%;
     min-width: 960px;

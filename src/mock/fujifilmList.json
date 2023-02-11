@@ -1,0 +1,86 @@
+[
+    {
+        "id": "cc",
+        "name": "经典正片",
+        "ename": "Classic Chrome",
+        "img_url": "/fujifilm-images/cc.png"
+    },
+    {
+        "id": "cn",
+        "name": "经典负片",
+        "ename": "Classic Neg.",
+        "img_url": "/fujifilm-images/cn.png"
+    },
+    {
+        "id": "provia",
+        "name": "标准模式",
+        "ename": "Provia",
+        "img_url": "/fujifilm-images/provia.png"
+    },
+    {
+        "id": "astia",
+        "name": "柔和模式",
+        "ename": "Astia",
+        "img_url": "/fujifilm-images/astia.png"
+    },
+    {
+        "id": "velvia",
+        "name": "鲜艳模式",
+        "ename": "Velvia",
+        "img_url": "/fujifilm-images/velvia.png"
+    },
+    {
+        "id": "eterna",
+        "name": "电影胶片模式",
+        "ename": "Eterna",
+        "img_url": "/fujifilm-images/eterna.png"
+    },
+    {
+        "id": "eb",
+        "name": "电影漂白模式",
+        "ename": "Eterna Bleach Bypass",
+        "img_url": "/fujifilm-images/eb.png"
+    },
+    {
+        "id": "ns",
+        "name": "专业彩色负片·标准",
+        "ename": "PRO Neg.Std",
+        "img_url": "/fujifilm-images/ns.png"
+    },
+    {
+        "id": "nh",
+        "name": "专业彩色负片·高对比",
+        "ename": "PRO Neg.Hi",
+        "img_url": "/fujifilm-images/nh.png"
+    },
+    {
+        "id": "acros",
+        "name": "黑白颗粒模式",
+        "ename": "Acros",
+        "img_url": "/fujifilm-images/acros.png"
+    },
+    {
+        "id": "monostd",
+        "name": "黑白模式",
+        "ename": "Mono STD",
+        "img_url": "/fujifilm-images/monostd.png"
+    },
+    {
+        "id": "nn",
+        "name": "怀旧负片",
+        "ename": "NOSTALGIC Neg.",
+        "img_url": "/fujifilm-images/nn.png"
+    },
+    {
+        "id": "sepia",
+        "name": "棕褐色模式",
+        "ename": "Sepia",
+        "img_url": "/fujifilm-images/sepia.png"
+    },
+    {
+        "id": "fujifilm",
+        "name": "富士胶片模拟",
+        "ename": "Expecting more...",
+        "img_url": "/fujifilm-images/fujifilm.png"
+    }
+]

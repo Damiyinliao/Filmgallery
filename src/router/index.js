@@ -22,7 +22,13 @@ const routes = [
         component: Film,
         meta: {
             show: false
-        }
+        }            
+    },
+    {
+        name: 'filmpanel',
+        path: '/films/:id',
+        component: () => import('@/views/Panel')
+        
     },
     {
         name: 'fujifilm',

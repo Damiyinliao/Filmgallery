@@ -1,19 +1,21 @@
 <template>
   <div id="film">
-    <div class="search-bar">
-      <img src="./images/search.png" alt="" class="search-img">
-      <input type="text" placeholder="搜索你想看的胶片类型" v-model="searchValue">
-      <div class="filter-button" @click="showOptions = !showOptions">
-        <img src="./images/sorting-options.png" alt="" srcset="" class="filter-img">
+    <SearchBox
+      placeholderValue="搜索你想看的胶片类型"
+      @showSelector="getIsShowSelector"
+    ></SearchBox>
+    <!-- 使其过渡效果更加自然 -->
+    <Transition>
+      <div class="search-options" v-show="isShowOptions">
+        <Selector></Selector>
       </div>
-    </div>
-    <div class="search-options" v-show="showOptions">
-      <Selector></Selector>
-    </div>
+    </Transition>
+    
     <div class="films-wrapper" style="margin-top: 20px;">
-      <div class="film-card" v-for="item in filmList" :key="item.id">
+      <!-- 每个胶片卡片 -->
+      <div class="film-card" v-for="item in filmList" :key="item.id" @click="toInfoPanel(item.id)">
         <img class="film-img" :src='item.imgurl'>
-        <span class="film-title">{{ item.title }}</span>
+        <span class="film-title">{{ item.name }}</span>
         <div class="film-intro">
           <div class="film-type">
             <span>类型</span>
@@ -29,35 +31,27 @@
   </div>
 </template>
 
-<script>
-import { computed, getCurrentInstance, onMounted, reactive, ref } from 'vue';
-import Selector from './Selector'
-import { useStore } from 'vuex';
-export default {
-  name: 'Film',
-  components:{
-    Selector
-  },
-  setup(){
+<script setup>
+  import { computed, onMounted, reactive, ref } from 'vue';
+  import Selector from './Selector'
+  import { useStore } from 'vuex';
+  import { useRouter } from 'vue-router';
+    name: 'Film';
+    components:{
+      Selector
+    };
     const store = useStore();
+    const router = useRouter();
     const searchValue = ref('');
-    const showOptions = ref(false);
-    // const filmList = ref([
-    //   {
-    //     id: 1,
-    //     imgurl:'/film-images/fuji-c200.jpg',
-    //     title:'富士C200',
-    //     type:'彩负',
-    //     iso: 200
-    //   },
-    //   {
-    //     id: 2,
-    //     imgurl:'/film-images/fuji-100.png',
-    //     title:'富士业务100',
-    //     type: '彩负',
-    //     iso: 100,
-    //   }
-    // ]);
+    // isShowOptions 需要使用 let 修饰， const修饰会报错 Uncaught TypeError: Assignment to constant variable.
+    let isShowOptions = ref(false);
+    // 子传父 子组件emit父组件中的getIsShowSelector来改变isShowOptions的值来决定是否展示Selector组件
+    const getIsShowSelector = (value) => {
+      // 记住 ref包裹的值，需要.value 才能被修改
+      isShowOptions.value = !isShowOptions.value;
+      // 测试
+      // console.log("getIsShowSelector", value, isShowOptions);
+    };
     // 使用全局API来获取数据，计算得出，没有成功
     // const globalProperties = getCurrentInstance().appContext.config.globalProperties; // 获取全局挂载
     // const $API = globalProperties.$API;
@@ -74,18 +68,25 @@ export default {
     const filmList = computed(()=>{
       return store.state.filmList;
     });
-    function searchFilm(searchValue){
-    };
-    return {
-      searchValue,
-      showOptions,
-      filmList
+    const toInfoPanel = (id) => {
+      router.push({
+        name: 'filmpanel',
+        params: {
+          id: id
+        }
+      })
     }
-  }
-}
 </script>
 
 <style scoped lang="less">
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
   #film{
     height: 100%;
     display: flex;
@@ -94,59 +95,6 @@ export default {
     margin-top: 110px;
     padding-left: 80px;
     padding-right: 80px;
-    .search-bar{
-      position: relative;
-      transition: all .2s ease;
-      .search-img{
-        position: absolute;
-        top: 12px;
-        width: 20px;
-        opacity: .4;
-        color: #d4d3d3;
-        left: 20px;
-      }
-      input{
-        width: 360px;
-        height: 43px;
-        margin-bottom: 55px;
-        border-radius: 4px;
-        border: none;
-        font-size: 1em;
-        text-align: center;
-        font-weight: 500;
-        font-family: Montserrat;
-        color: #3c3c3c;
-        box-shadow: 0 2px 9px rgb(0 0 0 / 10%);
-        transition: all .4s ease;
-      }
-      .filter-button{
-        cursor: pointer;
-        background-color: rgb(162, 194, 223, 0.7);
-        position: absolute;
-        top: 9px;
-        right: 11px;
-        font-size: 1.1em;
-        z-index: 99;
-        // background-color: rgba(162,194,223,.7);
-        box-shadow: 4px 4px 50px -12px hsl(0deg 0% 61% / 40%);
-        width: 26px;
-        height: 26px;
-        border-radius: 4px;
-        // 图片水平垂直居中
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        transition: background-color .4s ease;
-        .filter-img{
-          width: 15px;
-        }
-      }
-      .filter-button:hover{
-        transform: scale(1.1);
-        background-color: rgb(162, 194, 223);
-      }
-    }
     .search-options{
 
     }
@@ -203,6 +151,17 @@ export default {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+          }
+          .film-type span:first-child,
+          .film-iso span:first-child{
+            font-size: .85em;
+            margin-bottom: 2px;
+            color: #b5b4b4;
+            font-weight: 300;
+          }
+          .film-type span:last-child,
+          .film-iso span:last-child{
+            font-size: 1em;
           }
         }
       }

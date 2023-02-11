@@ -44,16 +44,12 @@ export default {
                 label: '彩色负片',
             },
             {
-                value: 'ColorSlide',
-                label: '彩色正片',
+                value: 'RevarselFilm',
+                label: '反转片',
             },
             {
                 value: 'Black&White',
                 label: '黑白',
-            },
-            {
-                value: 'Black&WhiteSlide',
-                label: '黑白正片',
             },
             {
                 value: 'Cinestrip',
