@@ -1,5 +1,5 @@
 <template>
-  <div id="film">
+  <div id="film" v-show="route.fullPath=='/films'">
     <SearchBox
       placeholderValue="搜索你想看的胶片类型"
       @showSelector="getIsShowSelector"
@@ -29,19 +29,17 @@
       </div>
     </div> 
   </div>
+  <router-view></router-view>
 </template>
 
 <script setup>
   import { computed, onMounted, reactive, ref } from 'vue';
   import Selector from './Selector'
   import { useStore } from 'vuex';
-  import { useRouter } from 'vue-router';
-    name: 'Film';
-    components:{
-      Selector
-    };
+  import { useRoute, useRouter } from 'vue-router';
     const store = useStore();
     const router = useRouter();
+    const route = useRoute();
     const searchValue = ref('');
     // isShowOptions 需要使用 let 修饰， const修饰会报错 Uncaught TypeError: Assignment to constant variable.
     let isShowOptions = ref(false);
@@ -52,16 +50,6 @@
       // 测试
       // console.log("getIsShowSelector", value, isShowOptions);
     };
-    // 使用全局API来获取数据，计算得出，没有成功
-    // const globalProperties = getCurrentInstance().appContext.config.globalProperties; // 获取全局挂载
-    // const $API = globalProperties.$API;
-    // const filmList = computed(async ()=>{
-    //   let result = await $API.reqFilmList();
-    //   // console.log(result.data);
-    //   if(result.code == 200){
-    //     return result.data;
-    //   }
-    // });
     onMounted(()=>{
       store.dispatch("getFilmList");
     });
@@ -114,7 +102,6 @@
         align-items: center;
         justify-content: flex-end;
         transition: all .1s ease;
-        // border: 1px solid skyblue;
         background-color: #fff;
         box-shadow: 0 2px 9px rgb(0 0 0 / 10%);
         border-radius: 5px;

@@ -6,21 +6,24 @@
             <!-- <span>Filmgallery</span> -->
         </div>
         <!-- 头部第二块，主要导航点 -->
-        <ul class="nav">
-            <li><router-link to="/home" class="nav-item" >首页</router-link></li>
-            <li><router-link to="/film" class="nav-item" >胶片</router-link></li>
-            <li><router-link to="/fujifilm" class="nav-item" >胶片模拟</router-link></li>
-            <li><router-link to="/camera" class="nav-item" >胶片机</router-link></li>
-        </ul>
-        <!-- 头部第三块：搜索框，收藏，个人登录模块  -->
-        <!-- 考虑到小屏幕上看，ul 分为两块，小屏幕时，第二块ul不展示 -->
-        <ul class="right">
-            <li class="search">
-                <input type="text" value="搜索" class="search-query" >
-            </li>
-            <li class="favorite"><router-link to="/like" href=""><img src="./images/heart1.png" alt="喜欢"></router-link></li>
-            <li class="account"><router-link to="/account"><img src="./images/account.png" alt="账户"></router-link></li>
-        </ul>
+        <div class="right">
+            <div class="menu">
+                <div class="menu-item"><router-link to="/home" >首页</router-link></div>
+                <div class="menu-item"><router-link to="/explore">发现</router-link></div>
+                <div class="menu-item"><router-link to="/films" >胶片</router-link></div>
+                <div class="menu-item"><router-link to="/fujifilm" >胶片模拟</router-link></div>
+                <div class="menu-item"><router-link to="/camera" >胶片机</router-link></div>
+                <div class="menu-item"><router-link to="/create">创作中心</router-link></div>
+            </div>
+            <div class="login" >
+                <router-link to="/account">
+                    <img src="./images/account.png">
+                </router-link>
+                <!-- <div class="user-menu-wrapper">
+                    <div>退出登录</div>
+                </div> -->
+            </div>
+        </div>
     </header>
 </template>
 
@@ -43,11 +46,11 @@ export default {
     top: 0;
     width: 100%;
     height: 70px;
+    min-width: 960px;
     padding: 0 80px;
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 2px rgb(0 0 0 / 26%);
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
@@ -62,64 +65,46 @@ export default {
             vertical-align: middle;
         }
     }
-
-    .nav {
+    .right{
         display: flex;
         justify-content: space-between;
-        height: 35px;
-        align-items: center;
-        width: 400px;
-        .nav-item {
+        .menu{
+            display: flex;
+            justify-content: space-between;
+            .menu-item{
+                
+                position: relative;
+                margin: 0 20px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.1s ease;
+                // 所有“单词”一律不拆分换行，注意，我这里的“单词”包括连续的中文字符（还有日文、韩文等），或者可以理解为只有空格可以触发自动换行
+                // word-break: keep-all;
+                a{
+                    padding: 5px 10px;
+                    color: #000;
+                }
+            }
+            .menu-item:hover{
+                transform: scale(1.04);
+            }
+        }
+        .login{
             position: relative;
-        }
-
-        .nav-item:after {
-            content: '';
-            position: absolute;
-            bottom: -26px;
-            left: 0;
-            background-color: #a2c2df;
-            width: 0;
-            height: 3px;
-            transition: all 0.5s;
-        }
-
-        .nav-item:hover:after {
-            width: 100%
-        }
-    }
-
-    .right {
-        width: 300px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        .search-query{
-            height: 30px;
-            line-height: 30px;
-            box-sizing: border-box;
-            padding: 0 15px 0 30px;
-            border: 1px solid #e3e3e3;
-            color: #273849;
-            outline: none;
-            border-radius: 15px;
-            margin-right: 10px;
-            transition: border-color 0.2s ease;
-            background: #fff url(./images/search2.png) 8px 5px no-repeat;
-            background-size: 20px;
-            vertical-align: middle !important;
-        }
-        .favorite{
-            margin-right: 10px;
+            margin-left: 20px;
+            display: flex;
+            width: 36.5px;
+            height: 36.5px;
+            border: 0.5px solid #ebebeb;
+            border-radius: 100%;
             img{
-                height: 30px;
-            }
-        }
-        .account{
-            img{
-                height: 25px;
+                width: 35.5px;
+                height: 35.5px;
+                cursor: pointer;
+                border-radius: 100%;
             }
         }
     }
-}
+}    
 </style>

@@ -7,6 +7,19 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  //配置代理跨域
+  devServer: {
+    proxy: {
+      "/api" :{                             //表示前端发起请求时，请求路径中带有/api就进行转发，找服务器要数据
+        target: "http://localhost:3000/v1",     //目标服务器
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+            '^/api': ''  
+        }
+      }
+    }
+  },
   //关闭语法检查
   lintOnSave: false,
   // 我们通过Vue CLI创建项目时，会自动生成public文件夹包含index.html文件，

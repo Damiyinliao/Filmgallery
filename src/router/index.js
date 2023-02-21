@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from "vue-router
 import Home from '@/views/Home'
 import Film from '@/views/Film'
 import Fujifilm from '@/views/FujiFilm'
+import Explore from '@/views/Explore'
 const routes = [
     {
         name:'home',
@@ -17,19 +18,35 @@ const routes = [
         redirect: '/'
     },
     {
-        name: 'film',
-        path: '/film',
+        name: 'explore',
+        path: '/explore',
+        component: Explore,  
+    },
+    {
+        name:'infocard',
+        path: '/explore/:id',
+        component: () => import('@/views/Card')
+    },
+    {
+        name: 'films',
+        path: '/films',
         component: Film,
         meta: {
             show: false
-        }            
+        },
+        children:[
+            {
+                name: 'filmpanel',
+                path: ':id',
+                component: () => import('@/views/Panel')        
+            },
+        ]            
     },
-    {
-        name: 'filmpanel',
-        path: '/films/:id',
-        component: () => import('@/views/Panel')
-        
-    },
+    // {
+    //     name: 'filmpanel',
+    //     path: '/films/:id',
+    //     component: () => import('@/views/Panel')        
+    // },
     {
         name: 'fujifilm',
         path: '/fujifilm',
@@ -41,9 +58,9 @@ const routes = [
         component: () => import("@/views/Camera")
     },
     {
-        name: 'like',
-        path: '/like',
-        component:() => import('@/views/Like')
+        name: 'create',
+        path: '/create',
+        component: () => import("@/views/Create")
     },
     {
         name: 'account',

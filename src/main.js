@@ -15,6 +15,8 @@ import * as API from '@/api'
 
 // 引入SearchBox组件将其注册为全局组件
 import SearchBox from '@/components/SearchBox'
+// 引入Card组件
+import Card from '@/components/Card'
 const app = createApp(App);
 // 配置全局请求API
 app.config.globalProperties.$API = API;
@@ -22,5 +24,6 @@ app.use(router);
 app.use(store);
 app.component(ElSelect.name, ElSelect);
 app.component(SearchBox, SearchBox);
+app.component(Card, Card);
 // app.use(UndrawUi)
 app.mount('#app')

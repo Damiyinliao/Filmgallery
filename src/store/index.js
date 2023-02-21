@@ -1,10 +1,12 @@
 import { createStore } from "vuex";
-import { reqFilmList, reqFujifilmList } from "@/api";
+import { reqFilmList, reqFujifilmList, reqNoteList, reqFilmInfo } from "@/api";
 export default createStore({
     // 数据
     state:{
         filmList: [],
-        fujifilmList: []
+        fujifilmList: [],
+        noteList: [],
+        filmInfo:{}
     },
     //
     mutations:{
@@ -13,6 +15,12 @@ export default createStore({
         },
         GETFUJIFILMLIST(state, data){
             state.fujifilmList = data;
+        },
+        GETNOTELIST(state, data){
+            state.noteList = data;
+        },
+        GETFILMINFO(state, data){
+            state.filmInfo = data;
         }
     },
     actions:{
@@ -26,6 +34,18 @@ export default createStore({
             let result = await reqFujifilmList();
             if(result.code == 200){
                 commit("GETFUJIFILMLIST", result.data);
+            }
+        },
+        async getNoteList({commit}){
+            let result = await reqNoteList();
+            if(result.code == 200){
+                commit("GETNOTELIST", result.data);
+            }
+        },
+        async getFilmInfo({commit}, filmId){
+            let result = await reqFilmInfo(filmId);
+            if(result.code == 200){
+                commit("GETFILMINFO", result.result);
             }
         }
     },

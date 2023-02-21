@@ -15,6 +15,7 @@
     "less-loader": "^11.1.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
+    "swiper": "^8.4.7",
     "undraw-ui": "^0.8.1",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6",
