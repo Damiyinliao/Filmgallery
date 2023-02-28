@@ -5,26 +5,26 @@
     ></SearchBox>
     <!-- Film Simulation Wrapper -->
     <div class="fujifilm-wrapper">
-      <div class="fujifilm-card card" v-for="item in fujifilmList" :key="item.id">
-        <img class="fujifilm-img" :src=item.img_url alt="">
+      <div class="fujifilm-card card" v-for="item in simulations" :key="item._id">
+        <img class="fujifilm-img" :src=item.sim_img_url alt="">
         <!-- <span class="fujifilm-ename">Classic Chrome</span> -->
-        <h2>{{item.ename}}</h2>
-        <h3>{{item.name}}</h3>
+        <h2>{{item.sim_ename}}</h2>
+        <h3>{{item.sim_cname}}</h3>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue';
+import { onBeforeMount, computed } from 'vue';
 import { useStore } from 'vuex';
 
   const store = useStore();
-  onMounted(()=>{
-    store.dispatch("getFujifilmList");
+  onBeforeMount(()=>{
+    store.dispatch("fujifilm/getSimulations");
   });
-  const fujifilmList = computed(()=>{
-    return store.state.fujifilmList;
+  const simulations = computed(()=>{
+    return store.state.fujifilm.Simulations;
   })
 </script>
 

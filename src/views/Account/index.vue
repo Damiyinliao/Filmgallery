@@ -2,11 +2,11 @@
   <div id="user-page">
     <div class="user">
       <div class="user-info">
-        <img src="./images/63ba6b1a13e27ea85cd2a31f.webp" alt="" class="user-image">
+        <img :src="user.avatar" alt="头像" class="user-image">
         <div class="user-nickname"><span class="user-name">{{ user.nickname }}</span></div>
         <div class="user-content"><span class="user-film-id">{{ user.id }}</span></div>
-        <div class="user-desc">{{ user.userdesc }}</div>
-        <div class="user-tags">{{ user.tags }}</div>
+        <div class="user-desc">{{ user.desc }}</div>
+        <div class="user-tags">{{ user.tag }}</div>
         <div class="user-interactions">
           <div>
             <span class="count">{{ user.follows }}</span>
@@ -15,10 +15,6 @@
           <div>
             <span class="count">{{ user.fans }}</span>
             <span class="shows">粉丝</span>
-          </div>
-          <div>
-            <span class="count">{{ user.likes }}</span>
-            <span class="shows">获赞</span>
           </div>
         </div>
       </div>
@@ -47,17 +43,17 @@
             </div>
           </div>
         </div>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
+        <SCard></SCard>
       </div>
     </div>
     <div class="back-top" @click="backTop" v-if="btnShow">
@@ -72,17 +68,21 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
-
-const user = reactive({
-  id: 9474821122,
-  nickname: "大米饮料",
-  userdesc: "擦一擦眼睛",
-  tags: '胶片爱好者',
-  follows: 13,
-  fans: 50,
-  likes: 22
-});
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
+// const user = reactive({
+//   id: 9474821122,
+//   nickname: "大米饮料",
+//   userdesc: "擦一擦眼睛",
+//   tags: '胶片爱好者',
+//   follows: 13,
+//   fans: 50,
+//   likes: 22
+// });
+const user = computed(() => {
+  return store.state.user.userInfo
+})
 const btnShow = ref(false);
 let timer = null; 
 onMounted(() => {

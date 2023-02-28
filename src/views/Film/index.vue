@@ -1,5 +1,5 @@
 <template>
-  <div id="film" v-show="route.fullPath=='/films'">
+  <div id="film">
     <SearchBox
       placeholderValue="搜索你想看的胶片类型"
       @showSelector="getIsShowSelector"
@@ -13,27 +13,26 @@
     
     <div class="films-wrapper" style="margin-top: 20px;">
       <!-- 每个胶片卡片 -->
-      <div class="film-card" v-for="item in filmList" :key="item.id" @click="toInfoPanel(item.id)">
-        <img class="film-img" :src='item.imgurl'>
-        <span class="film-title">{{ item.name }}</span>
+      <div class="film-card" v-for="item in filmList" :key="item.id" @click="toInfoPanel(item.film_id)">
+        <img class="film-img" :src='item.film_icon'>
+        <span class="film-title">{{ item.film_name }}</span>
         <div class="film-intro">
           <div class="film-type">
             <span>类型</span>
-            <span>{{ item.type }}</span>
+            <span>{{ item.film_type }}</span>
           </div>
           <div class="film-iso">
             <span>ISO</span>
-            <span>{{ item.iso }}</span>
+            <span>{{ item.film_iso }}</span>
           </div>
         </div>
       </div>
     </div> 
   </div>
-  <router-view></router-view>
 </template>
 
 <script setup>
-  import { computed, onMounted, reactive, ref } from 'vue';
+  import { computed, onBeforeMount, onMounted, reactive, ref } from 'vue';
   import Selector from './Selector'
   import { useStore } from 'vuex';
   import { useRoute, useRouter } from 'vue-router';
@@ -50,15 +49,15 @@
       // 测试
       // console.log("getIsShowSelector", value, isShowOptions);
     };
-    onMounted(()=>{
-      store.dispatch("getFilmList");
+    onBeforeMount(()=>{
+      store.dispatch("film/getFilmList");
     });
     const filmList = computed(()=>{
-      return store.state.filmList;
+      return store.state.film.filmList;
     });
     const toInfoPanel = (id) => {
       router.push({
-        name: 'filmpanel',
+        name: 'filmInfo',
         params: {
           id: id
         }

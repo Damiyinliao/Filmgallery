@@ -40,7 +40,14 @@ fieldset, img { border: none; }
 button, input, select, textarea {
     font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
 }
-
+input{
+    appearance: none;
+    outline: none;
+    border: none;
+    background: none;
+    padding: 0;
+    user-select: auto;
+}
 /* 重置表格元素 */
 table {
     border-collapse: collapse;

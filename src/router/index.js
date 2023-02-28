@@ -21,32 +21,34 @@ const routes = [
         name: 'explore',
         path: '/explore',
         component: Explore,  
+        children:[
+            {
+                name: 'card1',
+                path: 'card/:id',
+                component: () => import('@/views/Card')
+            }
+        ]
     },
     {
-        name:'infocard',
-        path: '/explore/:id',
-        component: () => import('@/views/Card')
-    },
-    {
-        name: 'films',
-        path: '/films',
+        name: 'film',
+        path: '/film',
         component: Film,
         meta: {
             show: false
-        },
+        }   
+    },
+    {
+        name: 'filmInfo',
+        path: '/film/:id',
+        component: () => import('@/views/FilmPanel'),
         children:[
             {
-                name: 'filmpanel',
-                path: ':id',
-                component: () => import('@/views/Panel')        
-            },
-        ]            
+                name: 'card2',
+                path: 'card/:card_id',
+                component: () => import('@/views/Card')
+            }
+        ]        
     },
-    // {
-    //     name: 'filmpanel',
-    //     path: '/films/:id',
-    //     component: () => import('@/views/Panel')        
-    // },
     {
         name: 'fujifilm',
         path: '/fujifilm',

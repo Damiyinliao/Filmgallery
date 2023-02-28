@@ -2,7 +2,7 @@
     <header id="header">
         <!-- 头部第一块，Logo展示 -->
         <div class="logo">
-            <img src="./images/film-logo.png" alt="胶片社区网">
+            <img src="http://img.filmgallery.cn/logo/film-logo.png" alt="胶片社区网">
             <!-- <span>Filmgallery</span> -->
         </div>
         <!-- 头部第二块，主要导航点 -->
@@ -10,15 +10,18 @@
             <div class="menu">
                 <div class="menu-item"><router-link to="/home" >首页</router-link></div>
                 <div class="menu-item"><router-link to="/explore">发现</router-link></div>
-                <div class="menu-item"><router-link to="/films" >胶片</router-link></div>
+                <div class="menu-item"><router-link to="/film" >胶片</router-link></div>
                 <div class="menu-item"><router-link to="/fujifilm" >胶片模拟</router-link></div>
                 <div class="menu-item"><router-link to="/camera" >胶片机</router-link></div>
                 <div class="menu-item"><router-link to="/create">创作中心</router-link></div>
             </div>
             <div class="login" >
-                <router-link to="/account">
+                <!-- <router-link to="/account">
                     <img src="./images/account.png">
-                </router-link>
+                </router-link> -->
+                <a @click="checkStatus">
+                    <img :src="headPortraitUrl">
+                </a>
                 <!-- <div class="user-menu-wrapper">
                     <div>退出登录</div>
                 </div> -->
@@ -26,16 +29,37 @@
         </div>
     </header>
 </template>
-
 <script>
-import { onMounted } from '@vue/runtime-core'
-import router from '@/router';
+import { useStore } from 'vuex';
+import { computed } from 'vue'
+import emiiter from '@/utils/eventBus'
+import { useRouter } from 'vue-router';
 export default {
     name: 'Header',
     setup() {
-        // onMounted(()=>{
-        //     console.log(router);
-        // })
+        const store = useStore();
+        const router = useRouter();
+        const headPortraitUrl = computed(()=>{
+            return store.state.user.userInfo.avatar;
+        });
+        // 检查状态，是否有账户信息，没有就登录，有就跳到账户页
+        const checkStatus = () => {
+            if(store.state.user.userInfo._id){
+                router.push({
+                    name: 'account'
+                })
+            }else{
+                Login();
+            }
+        };
+        // 全局事件总线，控制Login面板的显示
+        const Login = () =>{
+           emiiter.emit("isShowLogin1");
+        };
+        return {
+            headPortraitUrl,
+            checkStatus
+        };
     },
 }
 </script>
@@ -57,11 +81,11 @@ export default {
 
     .logo {
         height: 70px;
-        width: 70px;
+        width: 140px;
         line-height: 70px;
 
         img {
-            height: 40px;
+            height: 70px;
             vertical-align: middle;
         }
     }
@@ -71,8 +95,7 @@ export default {
         .menu{
             display: flex;
             justify-content: space-between;
-            .menu-item{
-                
+            .menu-item{                
                 position: relative;
                 margin: 0 20px;
                 display: flex;
