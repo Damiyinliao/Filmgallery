@@ -5,7 +5,7 @@
     ></SearchBox>
     <!-- Film Simulation Wrapper -->
     <div class="fujifilm-wrapper">
-      <div class="fujifilm-card card" v-for="item in simulations" :key="item._id">
+      <div class="fujifilm-card card" v-for="item in simulations" :key="item._id" @click="toSimPanel(item.simulation_id)">
         <img class="fujifilm-img" :src=item.sim_img_url alt="">
         <!-- <span class="fujifilm-ename">Classic Chrome</span> -->
         <h2>{{item.sim_ename}}</h2>
@@ -16,16 +16,28 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { onBeforeMount, computed } from 'vue';
 import { useStore } from 'vuex';
 
   const store = useStore();
+  // 挂载前获取信息
   onBeforeMount(()=>{
     store.dispatch("fujifilm/getSimulations");
   });
+  // 得到各个胶片模拟的数据
   const simulations = computed(()=>{
     return store.state.fujifilm.Simulations;
   })
+  // 跳转到信息面板
+  const toSimPanel = (simId) => {
+    router.push({
+      name: 'simulation',
+      params:{
+        id: simId
+      }
+    })
+  }
 </script>
 
 <style scoped lang="less">

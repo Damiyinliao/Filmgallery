@@ -3,37 +3,121 @@
     <SearchBox placeholderValue="查找你想看的胶片机"></SearchBox>
     <div class="cameras-container">
       <div class="camera">
-        <div class="camera-brand">Canon</div>
+        <!-- <div class="camera-brand">Canon</div> -->
         <div class="camera-wrapper">
           <!-- 每个相机卡片 -->
-          <div class="camera-card">
-            <img class="camera-img" src="./images/canon-prima-super-105u.jpg" alt="">
-            <span class="camera-title">Prima Super 105u</span>
+          <div class="camera-card" v-for="item in cameras">
+            <img class="camera-img" :src="item.picture_url" alt="">
+            <span class="camera-title">{{ item.name }}</span>
             <div class="camera-intro">
               <div class="camera-type">
                 <span>类型</span>
-                <span>傻瓜机</span>
+                <span>{{ item.type }}</span>
               </div>
               <div class="camera-time">
                 <span>生产日期</span>
-                <span>2003</span>
+                <span>{{ item.product_time }}</span>
               </div>
             </div>
           </div>
-          <div class="camera-card"></div>
-          <div class="camera-card"></div>
-          <div class="camera-card"></div>
-          <div class="camera-card"></div>
+
         </div>
 
       </div>
 
-    </div>  
+    </div>
   </div>
 </template>
 
 <script setup>
-import { } from "vue"
+import { reactive } from "vue"
+const cameras = reactive([
+  {
+    name: 'Prima Super 105u',
+    type: '傻瓜机',
+    product_time: 2003,
+    picture_url: 'http://img.filmgallery.cn/cameras/canon-prima-super-105u-2003.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Super 90 Wide',
+    type:'傻瓜机',
+    product_time: 2000,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-90-wide-2000.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Super 28v',
+    type:'傻瓜机',
+    product_time: 1999,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-28v-1999.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Shot',
+    type:'傻瓜机',
+    product_time: 1995,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-shot-1995.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Super 115',
+    type:'傻瓜机',
+    product_time: 1993,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-115-1993.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Autoboy A Xl',
+    type:'傻瓜机',
+    product_time: 1993,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-autoboy-a-xl-1993.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Canon Prima BF',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-BF-1992.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Mini',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Mini',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Mini',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Mini',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
+    brand: 'canon'
+  },
+  {
+    name: 'Prima Zoom Mini',
+    type:'傻瓜机',
+    product_time: 1992,
+    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
+    brand: 'canon'
+  },
+
+])
 </script>
 
 <style lang="less" scoped>
@@ -46,8 +130,6 @@ import { } from "vue"
   padding-left: 80px;
   padding-right: 80px;
 }
-
-.cameras-container {}
 
 .camera {
   display: flex;
@@ -79,7 +161,7 @@ import { } from "vue"
   border-radius: 5px;
 
   .camera-img {
-    height: 80px;
+    height: 90px;
     margin-bottom: 8px;
   }
 
@@ -131,8 +213,9 @@ import { } from "vue"
     }
   }
 }
+
 .camera-card:hover {
-    cursor: pointer;
-    transform: scale(1.04);
-  }
+  cursor: pointer;
+  transform: scale(1.04);
+}
 </style>

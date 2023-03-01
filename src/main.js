@@ -9,18 +9,26 @@ import '@/mock'
 import * as API from '@/api'
 // 引入SearchBox组件将其注册为全局组件
 import SearchBox from '@/components/SearchBox'
+// 广告卡片
+import AdCard from'@/components/AdCard'
 // 引入Card组件
 import SCard from '@/components/SCard'
 // 登录组件
 import Login from '@/components/Login'
+// 引入图片查看器
+import 'viewerjs/dist/viewer.css'
+import VueViewer from 'v-viewer'  
+
 // 创建应用实例对象
 const app = createApp(App);
 // 配置全局请求API
 app.config.globalProperties.$API = API;
 app.use(router);
 app.use(store);
+app.use(VueViewer);
 app.component(ElSelect.name, ElSelect);
-app.component(SearchBox, SearchBox);
-app.component(SCard, SCard);
-app.component(Login, Login);
+app.component(SearchBox);
+app.component(SCard);
+app.component(Login);
+app.component(AdCard);
 app.mount('#app')

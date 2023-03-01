@@ -55,6 +55,11 @@ const routes = [
         component: Fujifilm
     },
     {
+        name: 'simulation',
+        path: '/fujifilm/:id',
+        component: () => import('@/views/SimPanel'),
+    },
+    {
         name: 'camera',
         path: '/camera',
         component: () => import("@/views/Camera")

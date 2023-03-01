@@ -192,7 +192,6 @@ const cardInfo = computed(() => {
             background: #f9f9f9;
             flex-shrink: 0;
             flex-grow: 0;
-            -webkit-user-select: none;
             user-select: none;
             overflow: hidden;
             border-radius: 24px 0 0 24px;

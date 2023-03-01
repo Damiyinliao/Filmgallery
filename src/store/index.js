@@ -5,7 +5,7 @@ import user from "./modules/user";
 import film from "./modules/film";
 import fujifilm from "./modules/fujifilm";
 import card from "./modules/card";
-export default createStore({
+const store = createStore({
     modules: {
         card,
         user,
@@ -14,3 +14,4 @@ export default createStore({
         fujifilm
     }
 })
+export default store

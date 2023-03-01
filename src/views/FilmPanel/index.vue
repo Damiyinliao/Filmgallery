@@ -2,11 +2,11 @@
     <div class="wrapper">
         <aside>
             <div class="back-btn" @click="router.go(-1)">
-                <img src="./images/back-filled.png" style="margin-right: 5px; width: 12px; opacity: 0.8;">
+                <img src="@/assets/back-filled.png" style="margin-right: 5px; width: 12px; opacity: 0.8;">
                 返回
             </div>
             <div class="film-card card">
-                <img src="./images/share.png" alt="" srcset="" class="share">
+                <img src="@/assets/share.png" alt="" srcset="" class="share">
                 <img :src="filmInfo.film_icon" style="height: 80px;margin-left: 12px;margin-bottom: 20px;">
                 <span style="font-size: 14px; color: #3C3C3C;">{{ filmInfo.film_name }}</span>
                 <div class="film-info">
@@ -76,13 +76,7 @@
                 </a>
                 <p>With the click on the affiliate link you help me to keep the website running.</p>
             </div>
-            <div class="ad-card card">
-                <div class="ad-title"><span>广告</span></div>
-                <div class="ad-wrapper">
-                    <img src="./images/ad.png" >
-                    <span><b>YOUR AD HERE</b></span>
-                </div>
-            </div>
+            <AdCard></AdCard>
         </aside>
         <section>
             <div class="photo-wrapper card">
@@ -372,55 +366,7 @@ aside {
             opacity: 0.3;
             margin-top: 20px;
         }
-    }
-
-    .ad-card {
-        margin-top: 30px;
-        height: auto;
-        padding: 30px 20px 15px 30px;
-        margin-bottom: 20px;
-        color: #141414;
-        font-weight: 400;
-
-        .ad-title {
-            height: auto;
-            background-color: #fffced;
-            color: #d1c758;
-            border-radius: 4px;
-            padding: 4px 10px;
-            width: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1em;
-        }
-
-        .ad-wrapper {
-            border: 0.1px solid hsla(0, 0%, 50%, .094);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
-            background-size: cover;
-            border-radius: 4px;
-            font-weight: 500;
-            width: 280px;
-            height: 233px;
-            margin: 30px auto;
-            cursor: pointer;
-
-            img {
-                width: 65%;
-                margin-left: 43px;
-                margin-top: 27px;
-                margin-bottom: 20px;
-            }
-
-            b {
-                font-weight: 500;
-                font-size: 1em;
-                margin-left: 75px;
-                opacity: 0.8;
-            }
-        }
-    }
+    }  
 }
 
 section {
@@ -463,40 +409,6 @@ section {
             grid-row-gap: 30px;
             grid-template-columns: repeat(3, 1fr);
             justify-content: space-between;
-
-            .photo-item {
-                background-size: cover;
-                background-position: 50%;
-                width: 250px;
-                height: 210px;
-                border-radius: 0.25rem;
-                box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 5%);
-                position: relative;
-                margin-bottom: 20px;
-                transition: transform .1s ease-in;
-
-                img {
-                    width: 100%;
-                }
-
-                .image-credit {
-                    position: relative;
-                    // bottom: -170px;
-                    background-color: #f4f4f4;
-                    opacity: 1;
-                    width: 100%;
-                    text-align: right;
-                    padding-right: 10px;
-                    border-radius: 0 0 4px 4px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: center;
-                    color: #383838;
-                    font-size: 10px;
-                    transition: .4s;
-                }
-            }
         }
     }
 
