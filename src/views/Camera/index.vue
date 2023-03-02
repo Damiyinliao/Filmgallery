@@ -7,6 +7,7 @@
         <div class="camera-wrapper">
           <!-- 每个相机卡片 -->
           <div class="camera-card" v-for="item in cameras">
+            <span class="tag">{{ item.brand }}</span>
             <img class="camera-img" :src="item.picture_url" alt="">
             <span class="camera-title">{{ item.name }}</span>
             <div class="camera-intro">
@@ -159,6 +160,16 @@ const cameras = reactive([
   background-color: #fff;
   box-shadow: 0 2px 9px rgb(0 0 0 / 10%);
   border-radius: 5px;
+  .tag{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 20px;
+    background: pink;
+    line-height: 20px;
+    text-align: center;
+  }
 
   .camera-img {
     height: 90px;
