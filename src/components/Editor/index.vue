@@ -1,5 +1,5 @@
 <template>
-    <div class="editor">
+    <div class="editor" :class="{ active: active }">
         <div 
             ref="editorRef" 
             class="rich-input" 
@@ -20,7 +20,8 @@
                         <rect width="12" height="12" rx="2" fill="#86909C"></rect>
                         <path data-v-48a7e3c5="" data-v-7c7c7498="" fill-rule="evenodd" clip-rule="evenodd"
                             d="M5.98095 5.49307L8.22012 3.25389C8.28521 3.18881 8.39074 3.18881 8.45582 3.25389L8.69153 3.4896C8.75661 3.55468 8.75661 3.66021 8.69153 3.7253L6.45235 5.96447L8.69153 8.20364C8.75661 8.26873 8.75661 8.37426 8.69153 8.43934L8.45582 8.67505C8.39074 8.74013 8.28521 8.74013 8.22012 8.67505L5.98095 6.43587L3.74178 8.67505C3.67669 8.74013 3.57116 8.74013 3.50608 8.67505L3.27037 8.43934C3.20529 8.37426 3.20529 8.26873 3.27037 8.20364L5.50954 5.96447L3.27037 3.7253C3.20529 3.66021 3.20529 3.55468 3.27037 3.4896L3.50608 3.25389C3.57116 3.18881 3.67669 3.18881 3.74178 3.25389L5.98095 5.49307Z"
-                            fill="white"></path>
+                            fill="white">
+                        </path>
                     </svg>
                 </div>
             </div>
@@ -29,19 +30,22 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick } from "vue"
+import { ref, watch, nextTick, toRefs, onMounted, computed } from "vue"
 import isEmpty from '@/utils'
 import Toast from "../Toast";
-defineOptions({
-    name: 'Editor'
-})
-// 接受props以及设定默认值
-const props = withDefaults(defineProps(), {
-    minHeight: 30,
-    placeholder,
-    modelValue,
-    imgList
-})
+// defineOptions({
+//     name: 'Editor'
+// })
+// 接受props以及设定默认值 一般props是默认可选的，除非写了required:true就不需要写？，
+const props = defineProps({
+    minHeight:{
+        type: Number,
+        default: 30
+    },
+    placeholder: String,
+    modelValue: String,
+    imgList: Array
+});
 const range = ref()
 const editorRef = ref()
 const text = ref()
@@ -56,13 +60,7 @@ const padding = computed(() => {
     props.minHeight == 30 ? '4px 10px' : '8px 12px'
 })
 
-const emit = defineEmits({
-    blur,
-    focus,
-    input,
-    submit,
-    update:modelValue
-})
+const emit = defineEmits(['blur','focus','input','submit','update:modelValue']);
 
 watch(
   () => props.modelValue,

@@ -101,7 +101,7 @@
                 </div>
                 <div class="review-box">
                     <div class="comment-box">
-
+                        <Editor v-model="content" placeholder="请输入内容"></Editor>
                     </div>
                 </div>
             </div>

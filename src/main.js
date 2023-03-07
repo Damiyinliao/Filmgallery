@@ -18,7 +18,7 @@ import Login from '@/components/Login'
 // 返回按钮
 import BackBtn from '@/components/BackBtn'
 // 评论组件
-import Comment from '@/components/Comment'
+import Editor from '@/components/Editor'
 // 引入图片查看器
 import 'viewerjs/dist/viewer.css'
 import VueViewer from 'v-viewer'  
@@ -36,5 +36,5 @@ app.component(SCard);
 app.component(Login);
 app.component(AdCard);
 app.component(BackBtn);
-app.component(Comment);
+app.component(Editor);
 app.mount('#app')
