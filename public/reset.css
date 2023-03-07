@@ -90,6 +90,8 @@ body {
     /* font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue,Arial,PingFang SC,PingFang TC,PingFang HK,Microsoft Yahei,Microsoft JhengHei; */
     scroll-behavior: smooth;
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    /* 解决因出现滚动条 */
+    /* padding-left: calc(100vw - 100%); */
 }
 *{
     box-sizing: border-box;

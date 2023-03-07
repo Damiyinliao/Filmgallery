@@ -1,122 +1,70 @@
 <template>
     <div id="simulation-detail">
         <aside>
-            <div class="back-btn" @click="$router.go(-1)">
-                <img src="@/assets/back-filled.png" style="margin-right: 5px; width: 12px; opacity: 0.8;">
-                返回
-            </div>
+            <BackBtn></BackBtn>
             <div class="detail card">
                 <img src="@/assets/share.png" alt="分享" class="share">
-                <img :src="simulation.sim_icon" alt="CC" srcset="" class="icon">
-                <span class="name">{{ simulation.name }}</span>
+                <img :src="simulation.sim_img_url" alt="图标" class="icon">
+                <span class="name">{{ simulation.sim_ename }}</span>
                 <span class="title">特点</span>
-                <p class="desc">{{ simulation.desc }}</p>
+                <p class="desc">{{ simulation.sim_desc }}</p>
             </div>
             <div class="recipe-menu card">
                 <img src="@/assets/list-view-50-grey.png" alt="list">
                 <span>Recipe list</span>
                 <ul>
-                    <li class="recipe-item" tabindex="1" v-for="(item,index) in simulation.recipes" :key="item.name">
+                    <li class="recipe-item" tabindex="1" v-for="item in recipes" :key="item.name">
                         <a @click="switchRecipe(item.name)">{{ item.name }}</a>
                     </li>                  
                 </ul>
             </div>
             <AdCard></AdCard>
         </aside>
-        <Section :recipe="showingRecipe.s"></Section>
+        <Section :recipe="recipe"></Section>
     </div>
 </template>
 
 <script setup>
 import Section from './Section'
-import { reactive, ref } from "vue"
+import { reactive, computed, onBeforeMount, onMounted, ref ,onCreated} from "vue"
+import { useRoute } from "vue-router";
+import store from '@/store';
 
-const simulation = reactive({
-    sim_icon: "http://img.filmgallery.cn/fujifilms/cc.png",
-    name: "Classic Chrome",
-    desc: "暗部色彩强烈，高光色彩柔和，加强阴影对比度，呈现平静画面。",
-    recipes: [
-        {
-            name: "Kodachrome 64",
-            chip: "X-Trans V",
-            formula: [                
-                { name: "颗粒效果", grain: "Weak Small", value: "Weak Small",icon:"http://img.filmgallery.cn/icons/grain.png" },
-                { name: "色彩效果", color_effect: "Strong", value: "Strong",icon:"http://img.filmgallery.cn/icons/color-effect.png" },
-                { name: "彩色FX蓝色", color_effect_blue: "Weak", value: "Weak",icon:"http://img.filmgallery.cn/icons/color_fx_blue.png" },
-                { name: "白平衡", white_balance: "Daylight,+2Red,-5Blue", value: "Daylight,+2R,-5B",icon:"http://img.filmgallery.cn/icons/whitebalance.png" },
-                { name: "动态范围", dr: "DR200", value: "DR200",icon:"http://img.filmgallery.cn/icons/dr.png" },
-                { name: "D范围优先级", drp:"off", value:"关",icon:"http://img.filmgallery.cn/icons/drp.png"},
-                { name: "高光", highlight: 0, value: "0" ,icon:"http://img.filmgallery.cn/icons/highlight.png"},
-                { name: "阴影", shadow: 0, value: "0" ,icon:"http://img.filmgallery.cn/icons/shadow.png"},
-                { name: "色彩", color: 2, value: "2" ,icon:"http://img.filmgallery.cn/icons/color.png"},
-                { name: "锐度", acutance: 1, value: "1" ,icon:"http://img.filmgallery.cn/icons/sharp.png"},
-                { name: "高ISO降噪", denoise: -4, value: "-4" ,icon:"http://img.filmgallery.cn/icons/denoise.png"}, 
-                { name: "清晰度", clarity: 3, value: "3" ,icon:"http://img.filmgallery.cn/icons/clarity.png"},                               
-                { name: "ISO", iso: "up to ISO 6400", value: "up to ISO 6400",icon:"http://img.filmgallery.cn/icons/iso.png" },
-                { name: "曝光", exposure: "0~2/3", value: "0~2/3",icon:"http://img.filmgallery.cn/icons/exposure.png" }
-            ],
-            photos: [
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_1.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_2.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_3.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_4.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_5.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome64_6.jpg" }
-            ]
-        },
-        {
-            name: "Kodachrome 1",
-            chip: "X-Trans IV",
-            formula: [
-                { name: "颗粒效果", grain: "Strong Small", value: "Strong Small",icon:"http://img.filmgallery.cn/icons/grain.png" },
-                { name: "色彩效果", color_effect: "Strong", value: "Strong",icon:"http://img.filmgallery.cn/icons/color-effect.png" },
-                { name: "彩色FX蓝色", color_effect_blue: "Weak", value: "Weak",icon:"http://img.filmgallery.cn/icons/color_fx_blue.png" },
-                { name: "白平衡", white_balance: "Auto,+2Red,-4Blue", value: "Auto,+2Red,-4Blue",icon:"http://img.filmgallery.cn/icons/whitebalance.png" },
-                { name: "动态范围", dr: "DR400", value: "DR400",icon:"http://img.filmgallery.cn/icons/dr.png" },
-                { name: "D范围优先级", drp:"off", value:"关",icon:"http://img.filmgallery.cn/icons/drp.png"},
-                { name: "高光", highlight: 4, value: "4" ,icon:"http://img.filmgallery.cn/icons/highlight.png"},
-                { name: "阴影", shadow: -2, value: "-2" ,icon:"http://img.filmgallery.cn/icons/shadow.png"},
-                { name: "色彩", color: 4, value: "4" ,icon:"http://img.filmgallery.cn/icons/color.png"},
-                { name: "锐度", acutance: -2, value: "-2" ,icon:"http://img.filmgallery.cn/icons/sharp.png"},
-                { name: "高ISO降噪", denoise: -4, value: "-4" ,icon:"http://img.filmgallery.cn/icons/denoise.png"}, 
-                { name: "清晰度", clarity: 1, value: "1" ,icon:"http://img.filmgallery.cn/icons/clarity.png"},                               
-                { name: "ISO", iso: "up to ISO 6400", value: "up to ISO 6400",icon:"http://img.filmgallery.cn/icons/iso.png" },
-                { name: "曝光", exposure: "-1/3~-1", value: "-1/3~-1",icon:"http://img.filmgallery.cn/icons/exposure.png" }
-            ],
-            photos: [
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome1_1.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome1_2.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome1_3.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome1_4.jpg" },
-                { url: "http://img.filmgallery.cn/recipes/recipe_cc_kodachrome1_6.jpg" },
-            ]
-        },
-        {
-            name:"Kodak Ultramax 400"
-        },
-        {
-            name:"Kodak Portra 400 v2"
-        },
-        {
-            name:"Mystery Chrome"
-        },
-        {
-            name:"classic Kodak"
-        }
-    ]
+const route = useRoute();
+onBeforeMount(()=>{
+    store.dispatch("fujifilm/getSimulations");
+    store.dispatch("fujifilm/getRecipes",route.params.simid);    
+})
+const simulations = computed(()=>{
+    return store.state.fujifilm.simulations;
+})
+const recipes = computed(()=>{
+    return store.state.fujifilm.recipes
+})
+let sim_id = route.params.simid;
+const simulation = computed(()=>{
+    return simulations.value.find(s => s.simulation_id == sim_id);
+})
+onMounted(()=>{
+
 })
 //页面加载进来展示第一个recipe
-let index = 0;
+let index = ref(0)
+const recipe = computed(()=>{
+    let r = recipes.value[index.value]
+    return r||{};   //加上{}避免因为网络问题而获取不到数据出现undefined而报错
+})
+
+
 // 单层reactive没有使页面进行更新，再嵌套一层就ok
-let showingRecipe = reactive({
-    s:simulation.recipes[index]
-});
+// let showingRecipe = reactive({
+//     s:recipes.value[index]
+// });
 // 选择看哪个recipe点击之后切换 数据更新
 const switchRecipe = (name) => {
-    let arr = simulation.recipes;
+    let arr = recipes.value;
     // 查找对应的recipe.name
-    index = arr.findIndex(item => item.name === name);
-    showingRecipe.s = simulation.recipes[index];
+    index.value = arr.findIndex(item => item.name === name);
 }
 </script>
 
@@ -250,9 +198,5 @@ aside {
     }
 }
 
-section {
-    padding-left: 80px;
 
-
-}
 </style>

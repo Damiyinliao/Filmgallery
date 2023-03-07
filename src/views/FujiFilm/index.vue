@@ -18,23 +18,36 @@
 <script setup>
 import router from '@/router';
 import { onBeforeMount, computed } from 'vue';
-import { useStore } from 'vuex';
+import { useStore, mapGetters } from 'vuex';
 
   const store = useStore();
   // 挂载前获取信息
   onBeforeMount(()=>{
     store.dispatch("fujifilm/getSimulations");
   });
-  // 得到各个胶片模拟的数据
+  // 得到各个胶片模拟的数据并进行排序
   const simulations = computed(()=>{
-    return store.state.fujifilm.Simulations;
+    let data = store.state.fujifilm.simulations;
+    data.sort((a, b) => {
+            const nameA = a.simulation_id.split("", 1);
+            const nameB = b.simulation_id.split("", 1);
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+            return 0;
+        });
+    return data;
+    // return store.getters.fujifilm.sortSimById;
   })
   // 跳转到信息面板
   const toSimPanel = (simId) => {
     router.push({
       name: 'simulation',
       params:{
-        id: simId
+        simid: simId
       }
     })
   }

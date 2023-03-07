@@ -44,7 +44,10 @@ export default {
         });
         // 检查状态，是否有账户信息，没有就登录，有就跳到账户页
         const checkStatus = () => {
+            // store.dispatch("user/acquireUserInfo");
+            console.log(store.state.user.userInfo._id);
             if(store.state.user.userInfo._id){
+                
                 router.push({
                     name: 'account'
                 })

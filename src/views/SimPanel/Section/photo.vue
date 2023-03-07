@@ -15,9 +15,6 @@
 <script setup>
 import { onMounted } from 'vue';
 const props = defineProps(['photos'])
-// onMounted(() => {
-//     console.log(props.photos);
-// })
 </script>
 
 <style lang="less" scoped>

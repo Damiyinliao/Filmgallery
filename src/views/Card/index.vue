@@ -4,8 +4,8 @@
             <div class="media-container">
                 <div class="slider-container">
                     <Swiper :modules="modules" :pagination="{ type: 'fraction' }" :navigation="true" class="swiper-wrapper">
-                        <SwiperSlide class="swiper-slider" v-for="item in cardInfo.photos" :key="item._id">
-                            <img style="width:450px;" :src="item.url" alt="" srcset="">
+                        <SwiperSlide class="swiper-slider" v-for="item in cardInfo.photos" :key="item.url" v-viewer>
+                            <img style="width:450px;" :src="item.url" alt="图片" >
                         </SwiperSlide>
                     </Swiper>
                 </div>
@@ -148,15 +148,6 @@ const cardInfo = computed(() => {
 }
 
 .card-detail-mask {
-    // position: relative;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // // width: 100vw;
-    // // height: 100vh;
-    // background: hsla(0, 0%, 100%, 0);
-    // transition: all .4s;
-    // z-index: 20;
     position: fixed;
     left: 0;
     top: 0;

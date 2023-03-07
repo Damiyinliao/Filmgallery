@@ -56,13 +56,25 @@ const routes = [
     },
     {
         name: 'simulation',
-        path: '/fujifilm/:id',
+        path: '/fujifilm/:simid',
         component: () => import('@/views/SimPanel'),
     },
     {
         name: 'camera',
         path: '/camera',
         component: () => import("@/views/Camera")
+    },
+    {
+        name: 'cameraInfo',
+        path: '/camera/:cameraname',
+        component: () => import("@/views/CameraPanel"),
+        children:[
+            {
+                name: 'card3',
+                path: 'card/:card_id',
+                component: () => import('@/views/Card')
+            }
+        ]     
     },
     {
         name: 'create',
@@ -72,7 +84,14 @@ const routes = [
     {
         name: 'account',
         path: '/account',
-        component: () => import('@/views/Account')
+        component: () => import('@/views/Account'),
+        children:[
+            {
+                name: 'card4',
+                path: 'card/:card_id',
+                component: () => import('@/views/Card')
+            }
+        ]     
     }
 ];
 // createWebHistory() 路径不带'#'号

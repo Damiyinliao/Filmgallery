@@ -91,7 +91,7 @@ const getCardInfo = (id) => {
         width: 100vw;
         min-width: 960px;
         max-width: 100%;
-
+        padding-bottom: 150px;
         .feeds-wrapper {
             display: grid;
             grid-column-gap: 20px;

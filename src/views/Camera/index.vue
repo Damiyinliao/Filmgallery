@@ -3,21 +3,23 @@
     <SearchBox placeholderValue="查找你想看的胶片机"></SearchBox>
     <div class="cameras-container">
       <div class="camera">
-        <!-- <div class="camera-brand">Canon</div> -->
         <div class="camera-wrapper">
           <!-- 每个相机卡片 -->
-          <div class="camera-card" v-for="item in cameras">
-            <span class="tag">{{ item.brand }}</span>
-            <img class="camera-img" :src="item.picture_url" alt="">
+          <div class="camera-card" 
+            v-for="item in cameras" 
+            @click="toCameraPanel(item.full_name)"
+          >
+            <span :class="{tag:true, blue:item.brand=='konica', pink:item.brand=='canon'}">{{ item.brand }}</span>
+            <img class="camera-img" :src="item.pic_url_small" alt="相机">
             <span class="camera-title">{{ item.name }}</span>
             <div class="camera-intro">
               <div class="camera-type">
                 <span>类型</span>
-                <span>{{ item.type }}</span>
+                <span>傻瓜相机</span>
               </div>
               <div class="camera-time">
-                <span>生产日期</span>
-                <span>{{ item.product_time }}</span>
+                <span>上市时间</span>
+                <span>{{ item.ttm }}</span>
               </div>
             </div>
           </div>
@@ -31,94 +33,25 @@
 </template>
 
 <script setup>
-import { reactive } from "vue"
-const cameras = reactive([
-  {
-    name: 'Prima Super 105u',
-    type: '傻瓜机',
-    product_time: 2003,
-    picture_url: 'http://img.filmgallery.cn/cameras/canon-prima-super-105u-2003.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Super 90 Wide',
-    type:'傻瓜机',
-    product_time: 2000,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-90-wide-2000.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Super 28v',
-    type:'傻瓜机',
-    product_time: 1999,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-28v-1999.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Shot',
-    type:'傻瓜机',
-    product_time: 1995,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-shot-1995.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Super 115',
-    type:'傻瓜机',
-    product_time: 1993,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-super-115-1993.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Autoboy A Xl',
-    type:'傻瓜机',
-    product_time: 1993,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-autoboy-a-xl-1993.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Canon Prima BF',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-BF-1992.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Mini',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Mini',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Mini',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Mini',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
-    brand: 'canon'
-  },
-  {
-    name: 'Prima Zoom Mini',
-    type:'傻瓜机',
-    product_time: 1992,
-    picture_url:'http://img.filmgallery.cn/cameras/canon-prima-zoom-mini-1992.png',
-    brand: 'canon'
-  },
-
-])
+import { onBeforeMount, computed } from "vue"
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+const router = useRouter();
+const store = useStore();
+onBeforeMount(()=>{
+  store.dispatch("camera/getAllCameras");
+});
+const cameras = computed(()=>{
+  return store.state.camera.cameras
+});
+const toCameraPanel = (name) => {
+  router.push({
+    name: 'cameraInfo',
+    params: {
+      cameraname: name
+    }
+  })
+}
 </script>
 
 <style lang="less" scoped>
@@ -131,7 +64,12 @@ const cameras = reactive([
   padding-left: 80px;
   padding-right: 80px;
 }
-
+.blue{
+  background-color: rgb(97, 136, 181);
+}
+.pink{
+  background-color: pink;
+}
 .camera {
   display: flex;
   flex-direction: column;
@@ -166,7 +104,6 @@ const cameras = reactive([
     top: 0;
     width: 50px;
     height: 20px;
-    background: pink;
     line-height: 20px;
     text-align: center;
   }

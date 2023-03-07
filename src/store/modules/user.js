@@ -5,7 +5,7 @@ const state = () => ({
     token: localStorage.getItem('token'),
     userInfo: {
         _id: null,
-        avatar: "http://img.filmgallery.cn/head-portrait/default-account-img.png"
+        avatar:'http://img.filmgallery.cn/head-portrait/default-account-img.png'
     }
 })
 
@@ -23,10 +23,15 @@ const actions = {
     async getUserInfo({ commit }, username) {
         let res = await reqUserInfo(username);
         if (res.code == 200) {
+            localStorage.setItem('userInfo',JSON.stringify(res.data));
             commit("GETUSERINFO", res.data);
         }
         
     }
+    // acquireUserInfo({commit}){
+    //     let res = localStorage.getItem('userInfo');
+    //     commit("GETUSERINFO", res);
+    // }
 }
 
 const mutations = {

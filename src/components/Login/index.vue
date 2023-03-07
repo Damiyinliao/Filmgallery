@@ -161,7 +161,7 @@ const register = async () => {
       createTime: new Date().toLocaleString()
     })
     // 注册成功跳至登录页面
-    if (res.result.msg == 'REGISTERSUCCESS') {
+    if (res.data.data == 'REGISTERSUCCESS') {
       status.code = true;
     }
   }
@@ -173,9 +173,9 @@ const login = async () => {
   })
   console.log(res);
   // 登陆成功 存储Token
-  if (res.result.msg == 'LOGINSUCCESS') {
+  if (res.data.msg == 'LOGINSUCCESS') {
     //利用localstorage存储到本地
-    localStorage.setItem('token', res.result.access_token);
+    localStorage.setItem('token', res.data.access_token);
     store.dispatch("user/getUserInfo", user.phoneNumber);
     // 关闭页面
     closeLogin();

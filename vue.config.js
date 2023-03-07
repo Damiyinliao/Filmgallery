@@ -41,6 +41,7 @@ module.exports = defineConfig({
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      require('unplugin-vue-define-options/webpack')(),
     ],
   }
 })

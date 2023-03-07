@@ -169,7 +169,6 @@ const toInfoCard = (card_id) => {
 }
 
 aside {
-    height: 700px;
     width: 335px;
     margin-bottom: 50px;
 
