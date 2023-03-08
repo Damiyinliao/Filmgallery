@@ -1,4 +1,5 @@
 <template>
+  <!-- 展示小卡片组件 -->
     <div class="card-item">
         <a><img :src="cardInfo.photo_url" style="height:288px;width:216px"></a>
         <div class="footer">
