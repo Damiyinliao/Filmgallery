@@ -1,4 +1,5 @@
 <template>
+  <!-- emoji组件 -->
     <div class="emoji">
         <el-popover
             :placement="placement"
