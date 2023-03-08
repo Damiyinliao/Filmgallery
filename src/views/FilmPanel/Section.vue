@@ -319,7 +319,7 @@ section {
     margin-bottom: 80px;
     color: #141414;
     font-weight: 400;
-
+    width: 800px;
     .review-title {
       display: flex;
       justify-content: flex-start;

@@ -71,7 +71,8 @@ const props = defineProps({
     placement:{
       type: String,
       default: 'bottom'
-    }
+    },
+    emoji: Object
 })
 const activeIndex = ref(0)
 const offsetX = ref(0)

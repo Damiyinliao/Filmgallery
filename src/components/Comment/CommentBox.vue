@@ -64,7 +64,7 @@ const state = reactive({
 const input = (e) => {
     isEmpty(content.value.replace(/&nbsp;|<br>| /g, '')) ? (disabled.value = true) : (disabled.value = false)
 }
-const emit = defineEmits([    'close',    'hide']);
+const emit = defineEmits(['close','hide']);
 const submit = inject('InjectionCommentFun') // 由Comment.vue procide
 const emoji = inject('InjectionEmojiApi') // 由Comment.vue procide
 // 提交评论的数据
@@ -76,9 +76,9 @@ const onSubmit = () => {
         finish: () => {
             // 清空评论数据
             editorRef.value.clear(),
-                imgList.value.length = 0,
-                // 关闭评论
-                emit('close')
+            imgList.value.length = 0,
+            // 关闭评论
+            emit('close')
         }
     })
 }

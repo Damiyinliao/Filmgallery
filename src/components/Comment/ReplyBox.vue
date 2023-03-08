@@ -36,7 +36,7 @@ import { computed, inject, reactive } from 'vue'
 import ContentBox from './ContentBox.vue'
 import { ElPagination } from 'element-plus'
 
-const props = defineProps(['data','parenntId'])
+const props = defineProps(['data','parentId'])
 const state = reactive({
     loading: false,
     over: false,
@@ -98,8 +98,8 @@ const sizeChange = (val) => {
 <style lang="less" scoped>
 .reply-box {
     margin-top: 16px;
-    background: #1d1e1f;
-    color: #cfd3dc;
+    background: #f7f7f7;
+    color: #606266;
 
     .el-pagination {
         --el-pagination-button-disabled-bg-color: none;
