@@ -1,4 +1,5 @@
 <template>
+    <!-- footer组件 -->
     <footer id="footer">
         <div class="top">
             <div class="navigation-bar-wrapper">
