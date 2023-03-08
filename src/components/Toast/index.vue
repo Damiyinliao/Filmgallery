@@ -1,4 +1,5 @@
 <template>
+    <!-- 提示信息Toast -->
     <div class="toast">
         <transition name="toast">
             <div class="inner" v-show="visible">
