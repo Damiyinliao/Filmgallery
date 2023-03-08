@@ -1,4 +1,5 @@
 <template>
+    <!-- 输入框组件 -->
     <div class="editor" :class="{ active: active }">
         <div 
             ref="editorRef" 
