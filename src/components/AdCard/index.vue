@@ -1,4 +1,5 @@
 <template>
+    <!-- 广告小卡片 -->
     <div class="ad-card card">
         <div class="ad-title"><span>广告</span></div>
         <div class="ad-wrapper">
