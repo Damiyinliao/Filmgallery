@@ -8,14 +8,14 @@
         <!-- 头部第二块，主要导航点 -->
         <div class="right">
             <div class="menu">
-                <div class="menu-item"><router-link to="/home" >首页</router-link></div>
+                <div class="menu-item"><router-link to="/home">首页</router-link></div>
                 <div class="menu-item"><router-link to="/explore">发现</router-link></div>
-                <div class="menu-item"><router-link to="/film" >胶片</router-link></div>
-                <div class="menu-item"><router-link to="/fujifilm" >胶片模拟</router-link></div>
-                <div class="menu-item"><router-link to="/camera" >胶片机</router-link></div>
+                <div class="menu-item"><router-link to="/film">胶片</router-link></div>
+                <div class="menu-item"><router-link to="/fujifilm">胶片模拟</router-link></div>
+                <div class="menu-item"><router-link to="/camera">胶片机</router-link></div>
                 <div class="menu-item"><router-link to="/create">创作中心</router-link></div>
             </div>
-            <div class="login" >
+            <div class="login">
                 <!-- <router-link to="/account">
                     <img src="./images/account.png">
                 </router-link> -->
@@ -29,42 +29,34 @@
         </div>
     </header>
 </template>
-<script>
+<script setup>
 import { useStore } from 'vuex';
 import { computed } from 'vue'
 import emiiter from '@/utils/eventBus'
 import { useRouter } from 'vue-router';
-export default {
-    name: 'Header',
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const headPortraitUrl = computed(()=>{
-            return store.state.user.userInfo.avatar;
-        });
-        // 检查状态，是否有账户信息，没有就登录，有就跳到账户页
-        const checkStatus = () => {
-            // store.dispatch("user/acquireUserInfo");
-            console.log(store.state.user.userInfo._id);
-            if(store.state.user.userInfo._id){
-                
-                router.push({
-                    name: 'account'
-                })
-            }else{
-                Login();
-            }
-        };
-        // 全局事件总线，控制Login面板的显示
-        const Login = () =>{
-           emiiter.emit("isShowLogin1");
-        };
-        return {
-            headPortraitUrl,
-            checkStatus
-        };
-    },
-}
+import renderLogin from '../Login';
+import { removeGlobalNode } from "@/utils/dom";
+const store = useStore();
+const router = useRouter();
+const headPortraitUrl = computed(() => {
+    return store.state.user.userInfo.avatar;
+});
+// 检查状态，是否有账户信息，没有就登录，有就跳到账户页
+const checkStatus = () => {
+    if (store.state.user.userInfo._id) {
+        router.push({
+            name: 'account'
+        })
+    } else {
+        Login();
+    }
+};
+const options = removeGlobalNode;
+// 全局事件总线，控制Login面板的显示
+const Login = () => {
+    renderLogin(options)
+    //    emiiter.emit("isShowLogin1");
+};
 </script>
 
 <style scoped lang="less">
@@ -92,31 +84,37 @@ export default {
             vertical-align: middle;
         }
     }
-    .right{
+
+    .right {
         display: flex;
         justify-content: space-between;
-        .menu{
+
+        .menu {
             display: flex;
             justify-content: space-between;
-            .menu-item{                
+
+            .menu-item {
                 position: relative;
                 margin: 0 20px;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
                 transition: all 0.1s ease;
+
                 // 所有“单词”一律不拆分换行，注意，我这里的“单词”包括连续的中文字符（还有日文、韩文等），或者可以理解为只有空格可以触发自动换行
                 // word-break: keep-all;
-                a{
+                a {
                     padding: 5px 10px;
                     color: #000;
                 }
             }
-            .menu-item:hover{
+
+            .menu-item:hover {
                 transform: scale(1.04);
             }
         }
-        .login{
+
+        .login {
             position: relative;
             margin-left: 20px;
             display: flex;
@@ -124,7 +122,8 @@ export default {
             height: 36.5px;
             border: 0.5px solid #ebebeb;
             border-radius: 100%;
-            img{
+
+            img {
                 width: 35.5px;
                 height: 35.5px;
                 cursor: pointer;
@@ -132,5 +131,4 @@ export default {
             }
         }
     }
-}    
-</style>
+}</style>

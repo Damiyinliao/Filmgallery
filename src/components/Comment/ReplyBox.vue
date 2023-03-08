@@ -25,7 +25,8 @@
             </div>
             <div v-if="state.over" class="fetch-more">
                 <el-pagination v-if="page" small hide-on-single-page layout="total, prev, pager, next" :total="data.total"
-                    :page-size="state.pageSize" @current-change="currentChange" @size-change="sizeChange"></el-pagination>
+                    :page-size="state.pageSize" @current-change="currentChange" @size-change="sizeChange">
+                </el-pagination>
             </div>
         </div>
     </div>

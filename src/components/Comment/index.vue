@@ -6,12 +6,9 @@
             </div>
             <div class="content">
                 <div class="avatar-box">
-
-                        <el-avatar :size="40" :src="user.avatar">
-                            <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="">
-                        </el-avatar>
-
-                    
+                    <el-avatar :size="40" :src="user.avatar">
+                        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="">
+                    </el-avatar>
                 </div>
                 <CommentBox placeholder="输入评论（Enter换行，Ctrl + Enter发送）" content-btn="发表评论"></CommentBox>
             </div>
@@ -35,14 +32,10 @@ import CommentBox from './CommentBox.vue'
 import CommentList from './CommentList.vue'
 import { provide, toRefs, useSlots, reactive } from 'vue'
 
-
-// defineOptions({
-//     name: 'Comment'
-// })
 const props = defineProps({
     config: Object,
     showSize: {
-        type:Number,
+        type: Number,
         default: 3
     },   //显示评论的数量
     page: {
@@ -56,7 +49,7 @@ const slots = useSlots();
 // 将config属性转换为响应式数据
 const { user, comments } = toRefs(props.config);
 
-const emit = defineEmits([    'submit',    'like',    'replyPage',    'report',    'getUser',    'report',    'remove'])
+const emit = defineEmits(['submit', 'like', 'replyPage', 'report', 'getUser', 'report', 'remove'])
 
 /**
  * 提交评论
@@ -177,54 +170,56 @@ provide('InjectionContentBox', contentBox)
 
 <style lang="less" scoped>
 .comment {
-  background-color: #ffffff;
-  color: #303133;
-  border-radius: 4px;
-  // 设置的边框和内边距的值是包含在width内
-  box-sizing: border-box;
-  padding: 0 2.5rem;
-  padding-bottom: 2rem;
-  margin-top: 1.5rem;
+    background-color: #ffffff;
+    color: #303133;
+    border-radius: 4px;
+    // 设置的边框和内边距的值是包含在width内
+    box-sizing: border-box;
+    padding: 0 2.5rem;
+    padding-bottom: 2rem;
+    margin-top: 1.5rem;
 
-  .comment-form {
-    padding-top: 2rem;
-    .header {
-      .header-title {
-        font-size: 18px;
-        //多行元素的空间量，如多行文本的间距。
-        line-height: 30px;
-        font-weight: 600;
-      }
+    .comment-form {
+        padding-top: 2rem;
+
+        .header {
+            .header-title {
+                font-size: 18px;
+                //多行元素的空间量，如多行文本的间距。
+                line-height: 30px;
+                font-weight: 600;
+            }
+        }
+
+        .content {
+            margin-top: 2rem;
+            display: flex;
+
+            .el-avatar {
+                margin-right: 16px;
+            }
+        }
     }
 
-    .content {
-      margin-top: 2rem;
-      display: flex;
-      .el-avatar {
-        margin-right: 16px;
-      }
-    }
-  }
+    .comment-list-wrapper {
+        padding: 40px 0 16px;
 
-  .comment-list-wrapper {
-    padding: 40px 0 16px;
-    .title {
-      display: flex;
-      align-items: center;
-      position: relative;
-      line-height: 30px;
-      font-weight: 600;
-      font-size: 18px;
-      width: 100%;
-      justify-content: space-between;
-      padding-bottom: 8px;
+        .title {
+            display: flex;
+            align-items: center;
+            position: relative;
+            line-height: 30px;
+            font-weight: 600;
+            font-size: 18px;
+            width: 100%;
+            justify-content: space-between;
+            padding-bottom: 8px;
+        }
     }
-  }
 }
 
 html.dark {
-  .comment {
-    color: #ffffff;
-  }
-}
-</style>
+    .comment {
+        color: #ffffff;
+    }
+}</style>

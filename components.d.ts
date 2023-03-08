@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     AdCard: typeof import('./src/components/AdCard/index.vue')['default']
     BackBtn: typeof import('./src/components/BackBtn/index.vue')['default']
     BuyCard: typeof import('./src/components/BuyCard/index.vue')['default']
-    Carousel: typeof import('./src/components/Carousel/index.vue')['default']
     Comment: typeof import('./src/components/Comment/index.vue')['default']
     CommentBox: typeof import('./src/components/Comment/CommentBox.vue')['default']
     CommentList: typeof import('./src/components/Comment/CommentList.vue')['default']

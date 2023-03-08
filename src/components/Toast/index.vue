@@ -17,10 +17,8 @@
 import iconVue from '@/components/Icon'
 import { watch, onMounted, reactive, ref } from 'vue';
 import { getDefaultToastType, getToastType } from './toastTypes'
-// defineOptions({
-//     name: 'Toast'
-// })
-const props = withDefaults(defineProps(), {
+
+const props = defineProps({
     message: {
         type: String,
         default:''
@@ -60,7 +58,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .toast {
     position: fixed;
-    z-index: 100;
+    z-index: 9999;
     top: 0;
     right: 0;
     bottom: 0;

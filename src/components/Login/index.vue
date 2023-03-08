@@ -1,6 +1,7 @@
 <template>
-  <div id="login">
-    <div class="login-modal">
+  <div class="login">
+    <Transition name="login">
+      <div>
       <i tabindex="-1" aria-label="遮罩" class="mask"></i>
       <div class="login-container">
         <svg @click="closeLogin" t="1677203601046" class="close icon" viewBox="0 0 1024 1024" version="1.1"
@@ -92,6 +93,7 @@
         </div>
       </div>
     </div>
+    </Transition>
   </div>
 </template>
 
@@ -99,6 +101,7 @@
 import { useStore } from 'vuex';
 import { getCurrentInstance, reactive, watch, ref, onMounted, computed } from 'vue';
 import emitter from '@/utils/eventBus'
+import Toast from '../Toast';
 const globalProperties = getCurrentInstance().appContext.config.globalProperties; // 获取全局变量
 const $API = globalProperties.$API;
 const captchaCode = computed(() => {
@@ -107,6 +110,8 @@ const captchaCode = computed(() => {
 const getCaptchCode = () => {
   store.dispatch("user/getCaptchCode");
 }
+
+const props = defineProps(['options']);
 // 全局事件，关闭登录页面
 const closeLogin = () => {
   emitter.emit("closeLogin1");
@@ -131,11 +136,13 @@ const status = reactive({
   tips: ''        // 如果密码不一致的提醒
 })
 // 登录和注册切换过程中，如果切换到注册页面就进行刷新验证码
-watch(() => status.code, (newValue, oldValue) => {
-  if (newValue) {
-    getCaptchCode();
-  }
-}, { immediate: true })
+watch(
+  () => status.code,
+  (newValue, oldValue) => {
+    if (newValue) {
+      getCaptchCode();
+    }
+  }, { immediate: true })
 const resetCaptchaCode = () => getCaptchCode()
 const checkPwd = () => {
   if (user.password !== user.confirmPassword) {
@@ -152,6 +159,10 @@ const submit = () => {
   }
 }
 const register = async () => {
+  if (user.password !== user.confirmPassword) {
+    Toast({ type: 'warning', message: '密码不一致', duration: 2500 });  //提示密码有误
+    return;
+  }
   if (user.password == user.confirmPassword) {
     let res = await $API.reqUserRegister({
       username: user.phoneNumber,
@@ -162,6 +173,7 @@ const register = async () => {
     })
     // 注册成功跳至登录页面
     if (res.data.data == 'REGISTERSUCCESS') {
+      Toast({ type: 'success', message: '注册成功', duration: 2500 });  //提示注册成功
       status.code = true;
     }
   }
@@ -177,6 +189,7 @@ const login = async () => {
     //利用localstorage存储到本地
     localStorage.setItem('token', res.data.access_token);
     store.dispatch("user/getUserInfo", user.phoneNumber);
+    Toast({ type: 'success', message: '登陆成功', duration: 2500 });  //提示登陆成功
     // 关闭页面
     closeLogin();
   }
@@ -188,11 +201,12 @@ const createQrcode = () => {
 onMounted(() => {
   getCaptchCode();
 })
+
 </script>
 
 <style lang="less" scoped>
-.login-modal {
-  z-index: 100010;
+.login {
+  z-index: 998;
   visibility: visible;
   opacity: 1;
   display: flex;
@@ -205,6 +219,18 @@ onMounted(() => {
   height: 100%;
   box-sizing: border-box;
   transition: opacity .2s, visibility .2s;
+}
+
+// 设置过渡效果
+login-enter-active,
+login-leave-active {
+  transition: all 0.3s;
+}
+
+login-enter-from,
+login-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
 }
 
 .mask {

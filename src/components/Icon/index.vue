@@ -11,9 +11,6 @@
 import { computed } from 'vue'
 import { isNumber } from '@/utils'
 
-// defineOptions({
-//     name: 'Icon'
-// })
 const props = defineProps({
     name: String,
     size: String,

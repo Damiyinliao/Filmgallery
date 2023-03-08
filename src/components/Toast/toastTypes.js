@@ -1,13 +1,3 @@
-// interface toastType {
-//     type: string
-//     options: toastTypeOptions
-// }
-
-// interface toastTypeOptions {
-//     color: string
-//     bgColor: string
-//     icon: string
-// }
 const toastTypes = [
     {
         type: 'success',
