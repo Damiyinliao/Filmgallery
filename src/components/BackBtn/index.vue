@@ -1,4 +1,5 @@
 <template>
+    <!-- 返回按钮组件 -->
     <div class="back-btn" @click="$router.go(-1)">
         <img src="@/assets/back-filled.png" style="margin-right: 5px; width: 12px; opacity: 0.8;">
         返回
