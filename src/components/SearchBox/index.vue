@@ -1,4 +1,4 @@
-<!-- 抽离 搜索框 SearchBox 组件 -->
+<!-- 搜索框 SearchBox 组件 -->
 <template>
     <div class="search-bar">
         <img src="./images/search.png" alt="" class="search-img">
