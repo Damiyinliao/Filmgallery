@@ -1,4 +1,5 @@
 <template>
+    <!-- 折叠组价 -->
     <div class="fold">
         <div class="txt-box" :class="{'over-hidden': fold}">
             <div ref="divBox">
