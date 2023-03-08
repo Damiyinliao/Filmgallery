@@ -1,4 +1,5 @@
 <template>
+    <!-- Icon组件包装svg -->
     <i class="icon" :style="style">
         <slot v-if="$slots.default" />
         <svg v-else aria-hidden="true">
