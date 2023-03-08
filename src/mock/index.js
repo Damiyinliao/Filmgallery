@@ -1,4 +1,4 @@
-// 引入mockjs模块
+// 引入mockjs模块 mock数据
 import Mock from "mockjs";
 
 //把JSON数据引入进来
