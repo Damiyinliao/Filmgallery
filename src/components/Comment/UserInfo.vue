@@ -14,10 +14,10 @@
 import { inject } from "vue"
 import { ElPopover } from "element-plus";
 const props = defineProps({
-    isUserInfo,
-    uid
+    isUserInfo: Boolean,
+    uid: String
 })
-const { getUser } = inject(InjectionContentBox);
+const { getUser } = inject('InjectionContentBox');
 const show = () => {
     getUser(props.uid, () => { })
 }

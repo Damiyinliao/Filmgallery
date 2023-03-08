@@ -6,8 +6,8 @@
             </div>
             <div class="content">
                 <div class="avatar-box">
-                    <el-avatar :size="40" :src="config.user.avatar">
-                        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="" srcset="">
+                    <el-avatar :size="40" :src="user.avatar">
+                        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="">
                     </el-avatar>
                 </div>
                 <CommentBox placeholder="输入评论（Enter换行，Ctrl + Enter发送）" content-btn="发表评论"></CommentBox>
@@ -29,17 +29,22 @@
 import { ElAvatar } from 'element-plus'
 import CommentBox from './CommentBox.vue'
 import CommentList from './CommentList.vue'
-import { provide, toRefs, useSlots } from 'vue'
-provide(InjectionCommentFun, submit)
-provide(InjectionEmojiApi, props.config.emoji)
+import { provide, toRefs, useSlots, reactive } from 'vue'
 
-defineOptions({
-    name: 'Comment'
-})
-const props = withDefaults(defineProps(), {
-    config,
-    showSize,   //显示评论的数量
-    page
+
+// defineOptions({
+//     name: 'Comment'
+// })
+const props = defineProps({
+    config: Object,
+    showSize: {
+        type:Number,
+        default: 3
+    },   //显示评论的数量
+    page: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const slots = useSlots();
@@ -47,15 +52,7 @@ const slots = useSlots();
 // 将config属性转换为响应式数据
 const { user, comments } = toRefs(props.config);
 
-const emit = defineEmits({
-    submit,
-    like,
-    replyPage,
-    report,
-    getUser,
-    report,
-    remove
-})
+const emit = defineEmits([    'submit',    'like',    'replyPage',    'report',    'getUser',    'report',    'remove'])
 
 /**
  * 提交评论
@@ -168,10 +165,10 @@ const contentBox = {
             }
         })
 }
-provide(InjectionCommentFun, submit)
-provide(InjectionEmojiApi, props.config.emoji)
-provide(InjectionReply, replyBox)
-provide(InjectionContentBox, contentBox)
+provide('InjectionCommentFun', submit)
+provide('InjectionEmojiApi', props.config.emoji)
+provide('InjectionReply', replyBox)
+provide('InjectionContentBox', contentBox)
 </script>
 
 <style lang="less" scoped>

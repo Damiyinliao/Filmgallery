@@ -66,46 +66,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="buy card">
-                <span class="card-title">Buy</span>
-                <a href="">
-                    <div class="buy-btn">
-                        <img src="./images/淘宝.png" alt="">
-                        <span>Buy from taobao</span>
-                    </div>
-                </a>
-                <p>With the click on the affiliate link you help me to keep the website running.</p>
-            </div>
+           
             <AdCard></AdCard>
         </aside>
-        <section>
-            <div class="photo-wrapper card">
-                <div class="photo-title">
-                    <img src="./images/screenshot.png">
-                    <span>Example Photos</span>
-                </div>
-                <div class="photo-grid">
-                    <div v-for="item in filmInfo.example_card_id">
-                        <SCard :card_id="item.id" @click="toInfoCard(item.id)"></SCard>
-                    </div>
-                </div>
-            </div>
-            <div class="review-wrapper card">
-                <div class="review-title">
-                    <img src="./images/speech-bubble-with-dots.png">
-                    <span>用户评论</span>
-                </div>
-                <div class="review-submit">
-                    <p>What do you think about the <span style="font-weight: 700;">Fuji C200</span>?</p>
-                    <p style="font-size: 0.8em; opacity: 0.8;"> 🖼️ Want to submit a photo?</p>
-                </div>
-                <div class="review-box">
-                    <div class="comment-box">
-                        <Editor v-model="content" placeholder="请输入内容"></Editor>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <Section :card_id="filmInfo.example_card_id"></Section>
     </div>
     <router-view v-slot="{ Component }">
         <transition name="bounce">
@@ -115,7 +79,8 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, reactive} from 'vue';
+import Section from './Section.vue'
+import { computed, onBeforeMount, reactive, onMounted} from 'vue';
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 
@@ -125,19 +90,19 @@ const store = useStore();
 const key = computed(()=>{
     route.fullPath;
 })
-onBeforeMount(()=>{
+onMounted(()=>{
     let filmId = route.params.id;
     store.dispatch("film/getFilmInfo", filmId);
 })
 const filmInfo = computed(()=>{
     return store.state.film.filmInfo
 })
-const toInfoCard = (card_id) => {
-    router.push({
-        name: 'card2',
-        params: { card_id }
-    })
-}
+// const toInfoCard = (card_id) => {
+//     router.push({
+//         name: 'card2',
+//         params: { card_id }
+//     })
+// }
 </script>
 
 <style scoped lang="less">
@@ -317,144 +282,6 @@ aside {
         }
     }
 
-    .buy {
-        margin-top: 30px;
-        height: auto;
-        padding: 30px 20px 15px 30px;
-        margin-bottom: 20px;
-        color: #141414;
-        font-weight: 400;
-
-        .card-title {
-            font-size: 1.2em;
-        }
-
-        .buy-btn {
-            width: 100%;
-            height: 31px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            background-color: #fff;
-            border: 1px solid #a4a4a4;
-            border-radius: 4px;
-            font-weight: 400;
-            font-size: 1em;
-            color: #535353;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: .8;
-            cursor: pointer;
-            transition: transform .1s ease-in;
-
-            img {
-                width: 17px;
-                margin-right: 5px;
-                opacity: 1;
-            }
-        }
-
-        .buy-btn:hover {
-            background-color: #c5def7;
-            transform: scale(1.04);
-        }
-
-        p {
-            font-size: 0.5em;
-            text-align: center;
-            opacity: 0.3;
-            margin-top: 20px;
-        }
-    }  
+     
 }
-
-section {
-    // height: 700px;
-    // width: 670px;
-    overflow: auto;
-
-    .photo-wrapper {
-        margin-top: 0px;
-        padding-bottom: 25px;
-        height: auto;
-        // width: 670px;
-        padding: 30px 20px 15px 30px;
-        margin-bottom: 20px;
-        color: #141414;
-        font-weight: 400;
-
-        .photo-title {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            color: #141414;
-            font-weight: 400;
-
-            img {
-                width: 23px;
-                margin-right: 10px;
-                opacity: 0.8;
-            }
-
-            span {
-                font-size: 1.2em;
-            }
-        }
-
-        .photo-grid {
-            margin-top: 20px;
-            display: grid;
-            grid-column-gap: 50px;
-            grid-row-gap: 30px;
-            grid-template-columns: repeat(3, 1fr);
-            justify-content: space-between;
-        }
-    }
-
-    .review-wrapper {
-        margin-top: 30px;
-        height: auto;
-        padding: 30px 20px 15px 30px;
-        margin-bottom: 80px;
-        color: #141414;
-        font-weight: 400;
-
-        .review-title {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 15px;
-
-            img {
-                width: 23px;
-                margin-right: 10px;
-                opacity: 0.8;
-            }
-
-            span {
-                font-size: 1.2em;
-            }
-        }
-
-        .review-submit {
-            font-weight: 600;
-            text-align: center;
-            font-size: 1.1em;
-        }
-
-        .review-box {
-            margin: auto;
-            max-width: 100%;
-
-            .comment-box {
-                border-radius: 20px;
-                box-shadow: 0px 2px 10px 1px rgb(0 52 102 / 11%);
-                border: 0px solid #aaaaaa;
-                background-color: #ffffff;
-                color: #111111;
-                margin: auto;
-                margin-top: 20px;
-            }
-        }
-    }
-}</style>
+</style>

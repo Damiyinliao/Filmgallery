@@ -17,13 +17,22 @@
 import iconVue from '@/components/Icon'
 import { watch, onMounted, reactive, ref } from 'vue';
 import { getDefaultToastType, getToastType } from './toastTypes'
-defineOptions({
-    name: 'Toast'
-})
+// defineOptions({
+//     name: 'Toast'
+// })
 const props = withDefaults(defineProps(), {
-    message: '',
-    duration: 2000,
-    type: 'normal'
+    message: {
+        type: String,
+        default:''
+    },
+    duration: {
+        type: Number,
+        default: 2000
+    },
+    type: {
+        type: String,
+        default: 'normal'
+    }
 })
 const alert = reactive(getDefaultToastType().options);
 const visible = ref(false);

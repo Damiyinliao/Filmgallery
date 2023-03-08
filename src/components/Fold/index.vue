@@ -14,13 +14,16 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
-defineOptions({
-    name: 'Fold'
-})
-const props = withDefaults(defineProps(),{
-    line: 5,
-    unfold
+import { computed, ref, onMounted, onUnmounted } from "vue"
+// defineOptions({
+//     name: 'Fold'
+// })
+const props = defineProps({
+    line: {
+        type: Number,
+        default: 5
+    },
+    unfold: Boolean
 })
 const line = computed(()=>{
     // Math.trunc 取出一个小数的小数部分

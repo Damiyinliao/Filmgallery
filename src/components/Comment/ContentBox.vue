@@ -119,14 +119,14 @@ import { ElAvatar, ElImage } from "element-plus";
 import Fold from '@/components/Fold'
 import Icon from '@/components/Icon'
 import Operation from "./Operation.vue";
-import { str, useEmojiParse } from '@/utils'
+import { str, useEmojiParse, isEmpty } from '@/utils'
 
 
 
 const props = defineProps({
-    small,
-    data,
-    parentId
+    small: Boolean,
+    data: Object,
+    parentId: String
 })
 
 const state = reactive({
@@ -142,8 +142,8 @@ const imgList = computed(() => {
   return temp?.split(', ')
 })
 
-const { allEmoji } = inject(InjectionEmojiApi);
-const { like, user, isUserInfo } = inject(InjectionContentBox); 
+const { allEmoji } = inject('InjectionEmojiApi');
+const { like, user, isUserInfo } = inject('InjectionContentBox'); 
 
 const level = (v) => {
   switch (v) {

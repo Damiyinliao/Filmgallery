@@ -40,19 +40,19 @@
 import { ref, inject} from "vue"
 import { ElPopover } from "element-plus";
 import Icon from '@/components/Icon'
-import str from '@/utils/index'
+import {str} from '@/utils/index'
 // 是否可以点击
 const active = ref(false);
 const popoverRef = ref();
 const props = defineProps({
     // 评论id
-    id,
+    id: String,
     // 父id
-    parentId,
+    parentId: String,
     // 用户id
-    uid
+    uid: String
 })
-const { user, report, remove } = inject(InjectionContentBox);
+const { user, report, remove } = inject('InjectionContentBox');
 // 隐藏操作栏
 const close = () =>{
     popoverRef.value?.hide();

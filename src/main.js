@@ -17,8 +17,12 @@ import SCard from '@/components/SCard'
 import Login from '@/components/Login'
 // 返回按钮
 import BackBtn from '@/components/BackBtn'
-// 评论组件
+// 购物卡片
+import BuyCard from '@/components/BuyCard'
+// 编辑器组件
 import Editor from '@/components/Editor'
+// 评论组件
+import Comment from '@/components/Comment'
 // 引入图片查看器
 import 'viewerjs/dist/viewer.css'
 import VueViewer from 'v-viewer'  
@@ -35,6 +39,8 @@ app.component(SearchBox);
 app.component(SCard);
 app.component(Login);
 app.component(AdCard);
+app.component(BuyCard);
 app.component(BackBtn);
 app.component(Editor);
+app.component(Comment);
 app.mount('#app')

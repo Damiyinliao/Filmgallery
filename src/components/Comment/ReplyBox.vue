@@ -33,13 +33,10 @@
   
 <script setup>
 import { computed, inject, reactive } from 'vue'
-import ContentBox from './content-box.vue'
+import ContentBox from './ContentBox.vue'
 import { ElPagination } from 'element-plus'
 
-const props = defineProps({
-    data,
-    parentId
-})
+const props = defineProps(['data','parenntId'])
 const state = reactive({
     loading: false,
     over: false,
@@ -47,7 +44,7 @@ const state = reactive({
     pageSize: 5
 })
 
-const { replyPage, showSize, page, comments } = inject(InjectionReply)
+const { replyPage, showSize, page, comments } = inject('InjectionReply')
 const data = computed(() => {
     let data = {
         total: 0,

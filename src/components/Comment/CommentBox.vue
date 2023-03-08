@@ -40,14 +40,14 @@
 <script setup>
 import { ClickOutside as vClickOutside, ElButton } from 'element-plus'
 import { ref, reactive, inject, nextTick } from "vue"
-import Editor from './Editor.vue';
+import Editor from '@/components/Editor'
 import { isEmpty, isNull, isImage } from '@/utils';
 import Toast from '../Toast';
 const props = defineProps({
-    placeholder,
-    contentBtn,
-    paraentId,
-    replay
+    placeholder: String,
+    contentBtn: String,
+    paraentId: String,
+    replay: String
 })
 
 const content = ref('')
@@ -64,12 +64,9 @@ const state = reactive({
 const input = (e) => {
     isEmpty(content.value.replace(/&nbsp;|<br>| /g, '')) ? (disabled.value = true) : (disabled.value = false)
 }
-const emit = defineEmits({
-    close,
-    hide
-})
-const submit = inject(InjectCommentFun) // 由Comment.vue procide
-const emoji = inject(InjectionEmojiApi) // 由Comment.vue procide
+const emit = defineEmits([    'close',    'hide']);
+const submit = inject('InjectionCommentFun') // 由Comment.vue procide
+const emoji = inject('InjectionEmojiApi') // 由Comment.vue procide
 // 提交评论的数据
 const onSubmit = () => {
     submit({

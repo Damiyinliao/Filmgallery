@@ -64,19 +64,20 @@
 <script setup>
 import {ref,} from "vue"
 import { ElPopover, ElImage, ElScrollbar } from "element-plus";
-defineOptions({
-    name: 'Emoji'
-})
-const props = withDefaults(defineProps(),{
-    placement: 'bottom'
+// defineOptions({
+//     name: 'Emoji'
+// })
+const props = defineProps({
+    placement:{
+      type: String,
+      default: 'bottom'
+    }
 })
 const activeIndex = ref(0)
 const offsetX = ref(0)
 const emojis = ref(new Array(2))
 const { emojiList, faceList } = props.emoji;
-const emit = defineEmits({
-    addEmoji
-})
+const emit = defineEmits(['addEmoji']);
 function change(val){
     activeIndex.value = val;
     switch (val) {

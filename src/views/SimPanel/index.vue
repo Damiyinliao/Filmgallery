@@ -26,7 +26,7 @@
 
 <script setup>
 import Section from './Section'
-import { reactive, computed, onBeforeMount, onMounted, ref ,onCreated} from "vue"
+import { reactive, computed, onBeforeMount, onMounted, ref } from "vue"
 import { useRoute } from "vue-router";
 import store from '@/store';
 

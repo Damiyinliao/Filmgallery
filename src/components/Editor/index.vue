@@ -31,7 +31,7 @@
 
 <script setup>
 import { ref, watch, nextTick, toRefs, onMounted, computed } from "vue"
-import isEmpty from '@/utils'
+import {isEmpty} from '@/utils'
 import Toast from "../Toast";
 // defineOptions({
 //     name: 'Editor'
