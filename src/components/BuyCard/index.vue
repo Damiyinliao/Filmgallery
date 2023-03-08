@@ -1,4 +1,5 @@
 <template>
+    <!-- 购买链接小卡片 -->
     <div class="buy card">
         <span class="card-title">Buy</span>
         <a href="">
