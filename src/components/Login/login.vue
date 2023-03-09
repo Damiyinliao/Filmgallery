@@ -227,13 +227,13 @@ const createQrcode = () => {
 }
 
 // 设置过渡效果
-login-enter-active,
-login-leave-active {
+.login-enter-active,
+.login-leave-active {
   transition: all 0.3s;
 }
 
-login-enter-from,
-login-leave-to {
+.login-enter-from,
+.login-leave-to {
   opacity: 0;
   transform: translateY(100%);
 }
