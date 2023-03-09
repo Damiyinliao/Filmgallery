@@ -22,7 +22,7 @@ declare module '@vue/runtime-core' {
     Footer: typeof import('./src/components/Footer/index.vue')['default']
     Header: typeof import('./src/components/Header/index.vue')['default']
     Icon: typeof import('./src/components/Icon/index.vue')['default']
-    Login: typeof import('./src/components/Login/index.vue')['default']
+    Login: typeof import('./src/components/Login/login.vue')['default']
     Operation: typeof import('./src/components/Comment/Operation.vue')['default']
     ReplyBox: typeof import('./src/components/Comment/ReplyBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

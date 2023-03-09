@@ -16,9 +16,6 @@
                 <div class="menu-item"><router-link to="/create">创作中心</router-link></div>
             </div>
             <div class="login">
-                <!-- <router-link to="/account">
-                    <img src="./images/account.png">
-                </router-link> -->
                 <a @click="checkStatus">
                     <img :src="headPortraitUrl">
                 </a>
@@ -32,9 +29,9 @@
 <script setup>
 import { useStore } from 'vuex';
 import { computed } from 'vue'
-import emiiter from '@/utils/eventBus'
+import emitter from '@/utils/eventBus'
 import { useRouter } from 'vue-router';
-import renderLogin from '../Login';
+import RenderLogin from '../Login';
 import { removeGlobalNode } from "@/utils/dom";
 const store = useStore();
 const router = useRouter();
@@ -51,12 +48,19 @@ const checkStatus = () => {
         Login();
     }
 };
-const options = removeGlobalNode;
-// 全局事件总线，控制Login面板的显示
+let loginDiv;
+// 登录按钮 点击开始全局渲染登录组件
 const Login = () => {
-    renderLogin(options)
-    //    emiiter.emit("isShowLogin1");
+    const { vnode, div } = RenderLogin(store);
+    loginDiv = div;
 };
+// 全局事件总线，监听事件，移除Login页面
+emitter.on("closeLogin1", () => {
+    removeGlobalNode(loginDiv);
+})
+emitter.on("getLoginInfo", (info) => {
+    store.dispatch("user/getUserInfo", info);
+})
 </script>
 
 <style scoped lang="less">
@@ -131,4 +135,5 @@ const Login = () => {
             }
         }
     }
-}</style>
+}
+</style>

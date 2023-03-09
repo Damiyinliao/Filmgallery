@@ -13,8 +13,6 @@ import SearchBox from '@/components/SearchBox'
 import AdCard from'@/components/AdCard'
 // 引入Card组件
 import SCard from '@/components/SCard'
-// 登录组件
-import Login from '@/components/Login'
 // 返回按钮
 import BackBtn from '@/components/BackBtn'
 // 购物卡片
@@ -37,7 +35,6 @@ app.use(VueViewer);
 app.component(ElSelect.name, ElSelect);
 app.component(SearchBox);
 app.component(SCard);
-app.component(Login);
 app.component(AdCard);
 app.component(BuyCard);
 app.component(BackBtn);

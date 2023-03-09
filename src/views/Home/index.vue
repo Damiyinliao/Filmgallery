@@ -1,8 +1,7 @@
 <template>
-    <Login v-if="isShow"></Login>
     <div id="container">
         <div class="carousel-bg">
-            <img src="./images/friends.jpeg" alt="" srcset="">
+            <img src="./images/friends.jpeg" alt="首页图片">
         </div>
         <div class="content">
             <div class="middle-wrapper">
@@ -20,25 +19,6 @@
 </template>
 
 <script>
-import emitter from '@/utils/eventBus'
-import { ref } from 'vue'
-export default {
-    name: 'Home',
-    setup() {
-        const isShow = ref(false);
-        // 全局事件总线，监听事件，是否展示Login页面
-        emitter.on("isShowLogin1", () => {
-            isShow.value = !isShow.value;
-        })
-        emitter.on("closeLogin1", () => {
-            isShow.value = false;            
-        })
-        return {
-            isShow,
-            emitter
-        }
-    }
-}
 </script>
 
 <style scoped lang="less">
@@ -107,4 +87,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

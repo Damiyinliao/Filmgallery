@@ -1,7 +1,10 @@
 <template>
   <Header />
   <router-view></router-view>
-  <Footer v-show="$route.meta.show"/>
+  <div v-show="$route.meta.show">
+    <Footer />
+  </div>
+  
 </template>
 
 <script>

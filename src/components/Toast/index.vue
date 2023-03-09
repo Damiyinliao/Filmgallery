@@ -1,7 +1,7 @@
 <template>
     <!-- 提示信息Toast -->
     <div class="toast">
-        <transition name="toast">
+        <Transition name="toast">
             <div class="inner" v-show="visible">
                 <div class="message">
                     <iconVue v-if="alert.icon" v-html="alert.icon"></iconVue>
@@ -10,7 +10,7 @@
                     </span>
                 </div>
             </div>
-        </transition>
+        </Transition>
     </div>
 </template>
 
