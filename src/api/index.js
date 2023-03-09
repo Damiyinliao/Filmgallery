@@ -33,4 +33,6 @@ export const reqAllCameras = () => requests({ url: "/camera", method: 'get' });
 // 查询某一个相机数据
 export const reqCameraInfo = (name) => requests({ url: `/camera/${name}`, method: 'get' });
 // 获取某一个胶片模拟所对应的所有Recipes
-export const reqGetRecipes = (simid) => requests({ url: `/recipe/${simid}`, method: 'get' })
+export const reqGetRecipes = (simid) => requests({ url: `/recipe/${simid}`, method: 'get' });
+// 上传文件获取七牛云的token
+export const reqQiniuToken = () => requests({ url: "/upload/getkey", method: 'get' })

@@ -100,7 +100,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        transition: all .1s ease;
+        transition: all .2s ease;
         background-color: #fff;
         box-shadow: 0 2px 9px rgb(0 0 0 / 10%);
         border-radius: 5px;

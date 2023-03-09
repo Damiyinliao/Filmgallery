@@ -4,7 +4,7 @@ import router from '@/router'
 import { ElSelect } from 'element-plus'
 import store from './store'
 // 引入mock数据
-import '@/mock'
+// import '@/mock'
 // 引入所有请求API
 import * as API from '@/api'
 // 引入SearchBox组件将其注册为全局组件

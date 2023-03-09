@@ -82,7 +82,7 @@ import { useStore, mapGetters } from 'vuex';
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        transition: all .1s ease;
+        transition: all .2s ease;
         .fujifilm-img{
           height: 80px;
           margin-bottom: 20px;
