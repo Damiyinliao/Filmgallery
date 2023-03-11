@@ -23,9 +23,9 @@ const props = defineProps({
         type: Array
     }
 })
-onBeforeMount(() => {
-    console.log(props.data);
-})
+// onBeforeMount(() => {
+//     console.log(props.data);
+// })
 </script>
 
 <style lang="less" scoped></style>

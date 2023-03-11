@@ -27,7 +27,7 @@
   
   <script lang="ts" setup>
   import { ref } from 'vue'
-  
+  import { ElSelect } from 'element-plus';
   const value = ref('')
   
   const options = [

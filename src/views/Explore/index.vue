@@ -2,8 +2,15 @@
     <div id="explore">
         <div class="feeds-page">
             <div class="feeds-wrapper">
-                <section class="note-item" v-for="item in cardList" :key="item._id" @click="getCardInfo(item._id)">
-                    <img :src=item.photos[0].url @click="toInfoCard(item._id)">
+                <section class="card-item" v-for="item in cardList" :key="item._id" @click="getCardInfo(item._id)">
+                    <el-image 
+                        :src=item.photos[0].url 
+                        :key="item.photos[0].url"
+                        @click="toInfoCard(item._id)"
+                        lazy
+                        fit="contain"
+                    />
+                    
                     <div class="footer">
                         <a href="" class="title">
                             <span>{{ item.card_title }}</span>
@@ -28,6 +35,7 @@
                     </div>
                 </section>
             </div>
+            <BackTop></BackTop>
         </div>
         <router-view v-slot="{ Component }">
             <transition name="bounce">
@@ -38,9 +46,11 @@
 </template>
 
 <script setup>
-import { onBeforeMount, computed } from "vue";
+import { onBeforeMount, computed, ref } from "vue";
 import { useStore } from 'vuex';
 import { useRouter, useRoute} from 'vue-router';
+import { ElImage } from "element-plus";
+import 'element-plus/es/components/image/style/css'
 const store = useStore();
 const router = useRouter();
 const route = useRoute()
@@ -102,7 +112,7 @@ const getCardInfo = (id) => {
             transition: width .5s;
             margin: 0 auto;
 
-            .note-item {
+            .card-item {
                 background-color: #fff;
                 box-shadow: 0 2px 9px rgb(0 0 0 / 10%);
                 width: 216px;
@@ -111,10 +121,11 @@ const getCardInfo = (id) => {
                 overflow: hidden;
                 border-radius: 10px;
                 transition: all .5s ease;
-
-                img {
+                .el-image{
                     width: 216px;
                     height: 288px;
+                    display: block;
+                    cursor: pointer;
                 }
 
                 .footer {
@@ -183,7 +194,7 @@ const getCardInfo = (id) => {
                 }
             }
 
-            .note-item:hover {
+            .card-item:hover {
                 transform: scale(1.04);
             }
         }

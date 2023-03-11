@@ -170,15 +170,19 @@ const register = async () => {
     return;
   }
   if (user.password == user.confirmPassword) {
+    let str = user.phoneNumber;
+    let nickname = '游客' + str.substring(str.length-4); // 去手机号后4位加游客作为默认昵称
     let res = await reqUserRegister({
       username: user.phoneNumber,
       password: user.password,
       role: 'visitor',
+      nickname,
+      avatar:'http://img.filmgallery.cn/avatar/default_head_pic.webp',  //默认头像
       captcha: user.captcha,
       createTime: new Date().toLocaleString()
     })
     // 注册成功跳至登录页面
-    if (res.data.data == 'REGISTERSUCCESS') {
+    if (res.data.msg == 'REGISTERSUCCESS') {
       Toast({ type: 'success', message: '注册成功', duration: 2500 });  //提示注册成功
       status.code = true;
     }

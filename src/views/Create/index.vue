@@ -21,10 +21,10 @@
                 <div class="imgs-box">
                     <div class="top">
                         <div class="title">图片编辑</div>
-                        <button class="btn">
+                        <button class="btn" @click="getToken">
                             <span class="btn-content">
                                 <img src="@/assets/add.svg" alt="">
-                                上传更多
+                                启动上传
                             </span>
                         </button>
                     </div>
@@ -32,12 +32,14 @@
                         <el-upload 
                             v-model:file-list="fileList" 
                             action="http://upload-cn-east-2.qiniup.com"
+                            multiple
                             list-type="picture-card" 
                             :on-preview="handlePictureCardPreview" 
                             :on-remove="handleRemove"
                             :data="uploadData"
                             :before-upload="handleBeforeUpload"
                             :on-success="handleUploadSuccess"
+                            :on-error="handleUploadError"
                         >
                             <el-icon>
                                 <Plus />
@@ -49,18 +51,19 @@
                         </el-dialog>
                     </div>
                     <div class="card-title">
-                        <Editor
+                        <el-input
                             ref="editor1Ref"
-                            v-model="cardInfo.title"
+                            v-model="cardInfo.card_title"
                             placeholder="填写标题，会有更多赞~"
-                        ></Editor>
+                        ></el-input>
                     </div>
                     <div class="card-desc">
-                        <Editor
-                            ref="editor2Ref"
-                            v-model="cardInfo.title"
+                        <el-input
+                            v-model="cardInfo.desc"
+                            autosize
+                            type="textarea"
                             placeholder="填写更全面的信息，让更多人看到你的作品"
-                        ></Editor>
+                        ></el-input>
                     </div>
                 </div>
                 
@@ -71,15 +74,34 @@
             </div>
             <div class="content2">
                 <div class="select">
-                    <a style="background-color: #f9d770" @click="cardInfo.type='film'">胶片</a>
-                    <a style="background-color: #96c24e" @click="cardInfo.type='sim'">模拟胶片</a>
+                    <a @click="cardInfo.isSimulation=false">胶片</a>
+                    <a @click="cardInfo.isSimulation=true">模拟胶片</a>
                 </div>
                 <div class="details-box">
-                    <ul class="film" v-show="cardInfo.type=='film'">
+                    <ul class="film" v-if="!cardInfo.isSimulation">
+                        <li>
+                            <span class="item">胶片：</span><el-input v-model="cardInfo.film_type" placeholder="胶片类型" />
+                        </li>
+                        <li>
+                            <span class="item">相机：</span><el-input v-model="cardInfo.equipment" placeholder="相机名称" />
+                        </li>
+                    </ul>
+                    <ul v-else>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                         <li></li>
                         <li></li>
                         <li></li>
                     </ul>
+                </div>
+                <div class="submit-box">
+                    <button @click="submitAll"><span>发布</span></button>
+                    <button @click="clear"><span>清除</span></button>
                 </div>
             </div>
         </section>
@@ -87,63 +109,63 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { ElUpload, ElDialog, ElIcon } from 'element-plus';
+import { ref, reactive, onMounted, inject } from 'vue'
+import { ElUpload, ElDialog, ElIcon, } from 'element-plus';
 import 'element-plus/es/components/upload/style/css'
 import 'element-plus/es/components/dialog/style/css'
 import 'element-plus/es/components/icon/style/css'
 import { Plus } from '@element-plus/icons-vue'
-import Editor from '@/components/Editor'
 import { reqQiniuToken } from '@/api'
 import { useStore } from 'vuex';
+import Toast from '@/components/Toast';
+const $API = inject("$API");
 const store = useStore()
 const cardInfo = reactive({
     user_id: store.state.user.userInfo._id,
     user_avatar: store.state.user.userInfo.avatar,
-    username: '',
-    nickname:'',
+    username: store.state.user.userInfo.username,
+    nickname:store.state.user.userInfo.nickname,
     card_title:'',
     desc:'',
     isSimulation: false,
     film_type:'',
     equipment:'',
-    photos:[]
+    photos:[],
+    like:0
 })
-const qiniu_token = ref({token:""})
 
 const uploadData = reactive({
-    token:'DmyiQS2tf_DcCjS6c-UAf3bFmnWNvhBoFx-YSxho:OT9f98cEIcFfXYKsjEx0pB-KKBQ=:eyJzY29wZSI6ImZ1amlmaWxtcyIsImRlYWRsaW5lIjoxNjc4Mzc5NDU2fQ==',
+    token:'',
     key:''
 })
 
 async function getToken(){
-    let { data } = await reqQiniuToken();
-    console.log(data); //  { token: xxxxx }
-    qiniu_token.value = data
+    let qiniu_token = localStorage.getItem("qiniu_token");
+    if(qiniu_token){
+        console.log(qiniu_token);
+        uploadData.token = qiniu_token;
+    }else{
+        let { data } = await reqQiniuToken();
+        console.log(data); //  { token: xxxxx }
+        localStorage.setItem("qiniu_token",data.token);
+        uploadData.token = data.token;
+    }   
 }
+// 绑定的照片数组
 const fileList = ref([
-    // {
-    //     name: 'kodak-gold-200-1.jpeg',
-    //     url: '/images/kodak-gold-200-1.jpg',
-    // },
-    // {
-    //     name: 'kodak-gold-200-2.png',
-    //     url: '/images/kodak-gold-200-2.jpg',
-    // },
-    // {
-    //     name: 'kodak-gold-200-3.jpg',
-    //     url: '/images/kodak-gold-200-3.jpg',
-    // }
+    
 ])
 
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
+// 上传之前要处理的回调
 const handleBeforeUpload = (uploadFile) => {
-    // console.log(uploadFile.name);
+    console.log(uploadData);
     http://img.filmgallery.cn/upload/2023-03-03_14-58-40.png
     // 加上 'upload/' 表明你的图片位置存储到   你的空间/upload/file.name
     uploadData.key = 'upload/' + uploadFile.name;
 }
+// 上传成功之后处理的回调
 const handleUploadSuccess = (uploadFile, uploadFiles) => {
     //console.log("aaa",uploadFile);{hash: 'FvdMnQwbUs88DXhWqWZCVDE9tUlj', key: 'upload/fujifilm x100v.png'}
     let photo_item = {
@@ -152,14 +174,42 @@ const handleUploadSuccess = (uploadFile, uploadFiles) => {
     // 上传成功之后向photos添加链接
     cardInfo.photos.push(photo_item);
 }
+// 移除照片处理的回调
 const handleRemove = (uploadFile, uploadFiles) => {
-    console.log(uploadFile);
+    console.log(uploadFile.response.key);
+    // 要删除的照片的url
+    let photoUrl = `http://img.filmgallery.cn/${uploadFile.response.key}`;
+    // 对应的索引
+    let deleteIndex = cardInfo.photos.findIndex(item => item.url == photoUrl);
+    // 删掉对应的照片
+    cardInfo.photos.splice(deleteIndex, 1);
 }
-
+// 预览照片要处理的回调
 const handlePictureCardPreview = (uploadFile) => {
     // console.log(uploadFile);
     dialogImageUrl.value = uploadFile.url
     dialogVisible.value = true
+}
+// 处理上传失败的回调
+const handleUploadError = (file) =>{
+    console.log(file);
+    // getToken();
+}
+const clear = () => {
+    cardInfo.card_title = '';
+    cardInfo.desc = '';
+    cardInfo.film_type = '';
+    cardInfo.equipment = '';
+    fileList.value = '';
+    cardInfo.photos = [];
+}
+// 提交所有
+const submitAll = async () => {
+    console.log(cardInfo);
+    let result = await $API.uploadCard(cardInfo);
+    if(result.data._id){
+        Toast({type: 'success', message: '发布成功', duration: 2500 })
+    }
 }
 // onMounted(()=>{
 //     getToken()
@@ -311,15 +361,54 @@ section {
                 transition: all .2s ease;
                 border-radius: 3px;
                 margin-right: 10px;
+                border: .5px solid #cbccd0;
             }
             a:hover{
                 transform: scale(1.04);
+                background-color: #b1b4bb;
+            }
+            a:focus{
+                background-color: #b1b4bb;;
             }
         }
         
     }
-    // .details-box{
-
-    // }
+    .details-box{
+        padding: 20px;
+        .film{
+            display: flex;
+            li{
+                width: 400px;
+                padding: 5px;
+                display: flex;
+                // justify-content: ;
+                align-items: center;
+                
+            }
+        }
+        .item{
+            width: 60px;
+        }
+    }
+    .submit-box{
+        button{
+            width: 110px;
+            height: 40px;
+            font-size: 16px;
+            transition: all .5s ease;
+            margin-right: 20px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        button:hover{
+            transform: scale(1.04);
+        }
+    }
+    .submit-box button:first-child{
+        color: white;
+        background-color: #ff2442;
+        
+    }
 }
 </style>

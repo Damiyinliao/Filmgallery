@@ -32,7 +32,7 @@ const actions = {
     async getRecipes({ commit }, sim_id) {
         let result = await reqGetRecipes(sim_id);
         if (result.code == 200) {
-            localStorage.setItem('recipes', JSON.stringify(result.data))
+            // localStorage.setItem('recipes', JSON.stringify(result.data))
             commit("GETRECIPES", result.data)
         }
     }

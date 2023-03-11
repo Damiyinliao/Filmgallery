@@ -5,6 +5,7 @@ const state = () => ({
     token: localStorage.getItem('token'),
     userInfo: {
         _id: null,
+        username:'',
         avatar:'http://img.filmgallery.cn/head-portrait/default-account-img.png'
     }
 })

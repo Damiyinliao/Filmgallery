@@ -16,9 +16,10 @@ const requests = axios.create({
 requests.interceptors.request.use((config) => {
     // 请求开始，进度条开始
     nprogress.start();
-    // if(store.state.user.token){
-    //     config.headers.Authorization = 'Bearer ' + store.state.token;
-    // }
+    let token = localStorage.getItem('token');
+    if(token){
+        config.headers.Authorization = 'Bearer ' + token;
+    }
     return config
 });
 

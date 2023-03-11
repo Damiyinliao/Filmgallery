@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router'
-import { ElSelect } from 'element-plus'
 import store from './store'
 // 引入mock数据
 // import '@/mock'
@@ -21,23 +20,27 @@ import BuyCard from '@/components/BuyCard'
 import Editor from '@/components/Editor'
 // 评论组件
 import Comment from '@/components/Comment'
+// 返回顶部组件
+import BackTop from '@/components/BackBtn'
 // 引入图片查看器
 import 'viewerjs/dist/viewer.css'
 import VueViewer from 'v-viewer'  
 
 // 创建应用实例对象
 const app = createApp(App);
-// 配置全局请求API
-app.config.globalProperties.$API = API;
+// 配置全局请求API 方法一，不推荐
+// app.config.globalProperties.$API = API;
+// 配置全局请求API 方法二，推荐
+app.provide('$API', API);
 app.use(router);
 app.use(store);
 app.use(VueViewer);
-app.component(ElSelect.name, ElSelect);
-app.component(SearchBox);
-app.component(SCard);
-app.component(AdCard);
-app.component(BuyCard);
-app.component(BackBtn);
-app.component(Editor);
-app.component(Comment);
+app.component(SearchBox);   //搜索框组件
+app.component(SCard);       //小卡片组件
+app.component(AdCard);      //广告卡片组件
+app.component(BuyCard);     //购买卡片组件
+app.component(BackBtn);     //返回按钮
+app.component(Editor);      //编辑输入框
+app.component(Comment);     //评论组件
+app.component(BackTop);     //返回顶部组件
 app.mount('#app')

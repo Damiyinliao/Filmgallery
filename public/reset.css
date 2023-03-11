@@ -65,7 +65,9 @@ hr {
 	clear:both;
 }
 /* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
-html { overflow-y: scroll; }
+/* html { overflow-y: scroll; } */
+/* 隐藏竖滚动条 */
+/* html {overflow-y: hidden;}    */
 
 a:link:hover{
     color : rgb(79, 76, 212) !important;
@@ -95,4 +97,18 @@ body {
 }
 *{
     box-sizing: border-box;
+}
+
+/* 修改滚动条样式 */
+::-webkit-scrollbar{ /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+::-webkit-scrollbar-thumb{ /*滚动条里面小方块*/
+    border-radius: 10px;
+    background: #cfcbcb;
+}
+::-webkit-scrollbar-track{ /*滚动条里面轨道*/
+    border-radius: 10px;
+    background: #ededed;
 }

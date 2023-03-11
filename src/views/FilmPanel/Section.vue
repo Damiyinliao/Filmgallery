@@ -7,7 +7,7 @@
       </div>
       <div class="photo-grid">
         <div v-for="item in props.card_id">
-          <SCard :card_id="item.id" @click="toInfoCard(item.id)"></SCard>
+          <SCard :card_id="item._id" @click="toInfoCard(item._id)"></SCard>
         </div>
       </div>
     </div>
