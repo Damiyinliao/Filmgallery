@@ -65,8 +65,8 @@ const input = (e) => {
     isEmpty(content.value.replace(/&nbsp;|<br>| /g, '')) ? (disabled.value = true) : (disabled.value = false)
 }
 const emit = defineEmits(['close','hide']);
-const submit = inject('InjectionCommentFun') // 由Comment.vue procide
-const emoji = inject('InjectionEmojiApi') // 由Comment.vue procide
+const submit = inject('InjectionCommentFun') // 由Comment.vue provide
+const emoji = inject('InjectionEmojiApi') // 由Comment.vue provide
 // 提交评论的数据
 const onSubmit = () => {
     submit({
