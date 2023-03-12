@@ -48,11 +48,10 @@
 </template>
 
 <script setup>
-import { onBeforeMount, computed, ref, onMounted} from "vue";
+import { onBeforeMount, computed, ref, onMounted, watch } from "vue";
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import Card from "./section.vue";
-import { data } from "dom7";
 const store = useStore();
 const router = useRouter();
 const route = useRoute()
@@ -68,8 +67,26 @@ let columnOneData = ref([]),
         columnThreeData = ref([]),
         columnFourData = ref([]),
         columnFiveData = ref([]);
-       
-onMounted(() => {
+// onMounted会出现，组件挂载好了，但是数据还没有请求回来即为空就不会渲染界面，最后cardList有数据了也还是不会渲染界面，所以需要用watch监视数据来渲染界面
+// onMounted(() => {
+//     let i = 0;
+//     while (i < cardList.value.length) {
+//         columnOneData.value.push(cardList.value[i++]);// 一
+//         if (i < cardList.value.length) {
+//             columnTwoData.value.push(cardList.value[i++]);// 二
+//         }
+//         if (i < cardList.value.length) {
+//             columnThreeData.value.push(cardList.value[i++]);// 三
+//         }
+//         if (i < cardList.value.length) {
+//             columnFourData.value.push(cardList.value[i++]);// 四
+//         }
+//         if (i < cardList.value.length) {
+//             columnFiveData.value.push(cardList.value[i++]);// 五
+//         }
+//     }
+// })
+watch(()=>cardList.value, newValue => {
     let i = 0;
     while (i < cardList.value.length) {
         columnOneData.value.push(cardList.value[i++]);// 一
@@ -87,7 +104,6 @@ onMounted(() => {
         }
     }
 })
-
 // 呼出Card
 const toInfoCard = (id) => {
     router.push({
