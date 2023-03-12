@@ -9,27 +9,32 @@
                 <!-- 第一列 -->
                 <div class="column">
                     <!-- <div class="item"></div> -->
-                    <Card v-for="item in columnOneData" :key="item._id" @click="getCardInfo(item._id)" :info="item" @showCard="toInfoCard"></Card>
+                    <Card v-for="item in columnOneData" :key="item._id" @click="getCardInfo(item._id)" :info="item"
+                        @showCard="toInfoCard"></Card>
                 </div>
                 <!-- 第二列 -->
                 <div class="column">
                     <!-- <div class="item"></div> -->
-                    <Card v-for="item in columnTwoData" :key="item._id" @click="getCardInfo(item._id)" :info="item" @showCard="toInfoCard"></Card>
+                    <Card v-for="item in columnTwoData" :key="item._id" @click="getCardInfo(item._id)" :info="item"
+                        @showCard="toInfoCard"></Card>
                 </div>
                 <!-- 第三列 -->
                 <div class="column">
                     <!-- <div class="item"></div> -->
-                    <Card v-for="item in columnThreeData" :key="item._id" @click="getCardInfo(item._id)" :info="item" @showCard="toInfoCard"></Card>
+                    <Card v-for="item in columnThreeData" :key="item._id" @click="getCardInfo(item._id)" :info="item"
+                        @showCard="toInfoCard"></Card>
                 </div>
                 <!-- 第四列 -->
                 <div class="column">
                     <!-- <div class="item"></div> -->
-                    <Card v-for="item in columnFourData" :key="item._id" @click="getCardInfo(item._id)" :info="item" @showCard="toInfoCard"></Card>
+                    <Card v-for="item in columnFourData" :key="item._id" @click="getCardInfo(item._id)" :info="item"
+                        @showCard="toInfoCard"></Card>
                 </div>
                 <!-- 五列 -->
                 <div class="column">
                     <!-- <div class="item"></div> -->
-                    <Card v-for="item in columnFiveData" :key="item._id" @click="getCardInfo(item._id)" :info="item" @showCard="toInfoCard"></Card>
+                    <Card v-for="item in columnFiveData" :key="item._id" @click="getCardInfo(item._id)" :info="item"
+                        @showCard="toInfoCard"></Card>
                 </div>
             </div>
             <BackTop></BackTop>
@@ -43,9 +48,9 @@
 </template>
 
 <script setup>
-import { onBeforeMount, computed, ref } from "vue";
+import { onBeforeMount, computed, ref, onMounted} from "vue";
 import { useStore } from 'vuex';
-import { useRouter, useRoute} from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import Card from "./section.vue";
 import { data } from "dom7";
 const store = useStore();
@@ -58,28 +63,31 @@ onBeforeMount(() => {
 const cardList = computed(() => {
     return store.state.explore.allCards;
 })
-
 let columnOneData = ref([]),
-    columnTwoData = ref([]),
-    columnThreeData = ref([]),
-    columnFourData = ref([]),
-    columnFiveData = ref([]),
-    i = 0;
-while(i < cardList.value.length){
-    columnOneData.value.push(cardList.value[i++]);// 一
-    if(i < cardList.value.length){
-        columnTwoData.value.push(cardList.value[i++]);// 二
+        columnTwoData = ref([]),
+        columnThreeData = ref([]),
+        columnFourData = ref([]),
+        columnFiveData = ref([]);
+       
+onMounted(() => {
+    let i = 0;
+    while (i < cardList.value.length) {
+        columnOneData.value.push(cardList.value[i++]);// 一
+        if (i < cardList.value.length) {
+            columnTwoData.value.push(cardList.value[i++]);// 二
+        }
+        if (i < cardList.value.length) {
+            columnThreeData.value.push(cardList.value[i++]);// 三
+        }
+        if (i < cardList.value.length) {
+            columnFourData.value.push(cardList.value[i++]);// 四
+        }
+        if (i < cardList.value.length) {
+            columnFiveData.value.push(cardList.value[i++]);// 五
+        }
     }
-    if(i < cardList.value.length){
-        columnThreeData.value.push(cardList.value[i++]);// 三
-    }
-    if(i < cardList.value.length){
-        columnFourData.value.push(cardList.value[i++]);// 四
-    }
-    if(i < cardList.value.length){
-        columnFiveData.value.push(cardList.value[i++]);// 五
-    }
-}
+})
+
 // 呼出Card
 const toInfoCard = (id) => {
     router.push({
@@ -97,13 +105,16 @@ const getCardInfo = (id) => {
 .bounce-enter-active {
     animation: bounce-in 0.4s;
 }
-.bounce-leave-active{
+
+.bounce-leave-active {
     animation: bounce-in 0.4s reverse;
 }
+
 @keyframes bounce-in {
     0% {
         transform: scale(0);
     }
+
     100% {
         transform: scale(1);
     }
@@ -121,6 +132,7 @@ const getCardInfo = (id) => {
         min-width: 960px;
         max-width: 100%;
         padding-bottom: 150px;
+
         .feeds-wrapper {
             display: grid;
             grid-column-gap: 20px;
@@ -132,14 +144,14 @@ const getCardInfo = (id) => {
         }
     }
 }
-.waterfall-wrapper{
+
+.waterfall-wrapper {
     display: flex; // 设置为Flex容器
     flex-direction: row; // 主轴方向设置为水平方向
 }
+
 .column {
     display: flex; // 设置为Flex容器
     flex-direction: column; // 主轴方向设置为垂直方向
     padding: 10px;
-}
-
-</style>
+}</style>

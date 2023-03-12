@@ -7,7 +7,8 @@ const state = () => ({
         _id: null,
         username:'',
         avatar:'http://img.filmgallery.cn/head-portrait/default-account-img.png'
-    }
+    },
+    otherUserInfo:{}
 })
 
 const getters = {
@@ -24,15 +25,17 @@ const actions = {
     async getUserInfo({ commit }, username) {
         let res = await reqUserInfo(username);
         if (res.code == 200) {
-            localStorage.setItem('userInfo',JSON.stringify(res.data));
+            localStorage.setItem('userInfo',res.data._id);
             commit("GETUSERINFO", res.data);
+        }        
+    },
+    // 当想查看别人首页时，获取别人的首页信息
+    async getOtherUserInfo({ commit }, username){
+        let res = await reqUserInfo(username);
+        if(res.code == 200){
+            commit("GETOTHERUSERINFO", res.data)
         }
-        
     }
-    // acquireUserInfo({commit}){
-    //     let res = localStorage.getItem('userInfo');
-    //     commit("GETUSERINFO", res);
-    // }
 }
 
 const mutations = {
@@ -41,6 +44,9 @@ const mutations = {
     },
     GETUSERINFO(state, data) {
         state.userInfo = data;
+    },
+    GETOTHERUSERINFO(state, data) {
+        state.otherUserInfo = data;
     }
 }
 

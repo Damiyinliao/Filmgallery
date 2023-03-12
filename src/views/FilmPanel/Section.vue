@@ -17,14 +17,14 @@
         <span>用户评论</span>
       </div>
       <div class="review-submit">
-        <p>What do you think about the <span style="font-weight: 700;">Fuji C200</span>?</p>
-        <p style="font-size: 0.8em; opacity: 0.8;"> 🖼️ Want to submit a photo?</p>
+        <p>留下你对 <span style="font-weight: 700;">{{ props.fname }}</span> 的看法!!!</p>
+        <p style="font-size: 0.8em; opacity: 0.8;">提交你自己的照片</p>
       </div>
       <div class="review-box">
-        <div class="comment-box">
-          <Comment :config="config" :show-size="2" @submit="submit" @like="like" @remove="remove" @report="report">
-          </Comment>
-        </div>
+        <!-- <div class="comment-box"> -->
+        <Comment :config="config" :show-size="2" @submit="submit" @like="like" @remove="remove" @report="report">
+        </Comment>
+        <!-- </div> -->
       </div>
     </div>
   </section>
@@ -36,7 +36,10 @@ import { useRoute, useRouter } from 'vue-router'
 import emoji from "@/utils/emoji";
 import Toast from "@/components/Toast";
 const router = useRouter();
-const props = defineProps(['card_id']);
+const props = defineProps({
+  card_id: Array,
+  fname: String
+});
 
 const toInfoCard = (card_id) => {
   router.push({
@@ -53,78 +56,7 @@ const config = reactive({
     likeIds: ['1', '2', '11']
   },
   emoji: emoji,
-  comments: [
-    // {
-    //   id: '1',
-    //   parentId: null,
-    //   uid: '1',
-    //   address: '来自上海',
-    //   content:
-    //     '缘生缘灭，缘起缘落，我在看别人的故事，别人何尝不是在看我的故事?别人在演绎人生，我又何尝不是在这场戏里?谁的眼神沧桑了谁?我的眼神，只是沧桑了自己[喝酒]',
-    //   likes: 2,
-    //   contentImg: '/static/img/program.gif, /static/img/normal.webp',
-    //   createTime: '1分钟前',
-    //   user: {
-    //     username: '落🤍尘',
-    //     avatar: 'https://static.juzicon.com/avatars/avatar-200602130320-HMR2.jpeg?x-oss-process=image/resize,w_100',
-    //     level: 6,
-    //     homeLink: '/1'
-    //   }
-    // },
-    // {
-    //   id: '2',
-    //   parentId: null,
-    //   uid: '2',
-    //   address: '来自苏州',
-    //   content: '知道在学校为什么感觉这么困吗？因为学校，是梦开始的地方。[脱单doge]',
-    //   likes: 11,
-    //   createTime: '1天前',
-    //   user: {
-    //     username: '悟二空',
-    //     avatar: 'https://static.juzicon.com/user/avatar-bf22291e-ea5c-4280-850d-88bc288fcf5d-220408002256-ZBQQ.jpeg',
-    //     level: 1,
-    //     homeLink: '/2'
-    //   },
-    //   reply: {
-    //     total: 2,
-    //     list: [
-    //       {
-    //         id: '21',
-    //         parentId: '2',
-    //         uid: '3',
-    //         address: '来自重庆',
-    //         content: '说的对，所以，综上所述，上课睡觉不怪我呀💤',
-    //         likes: 3,
-    //         createTime: '1分钟前',
-    //         user: {
-    //           username: '别扰我清梦*ぁ',
-    //           avatar:
-    //             'https://static.juzicon.com/user/avatar-8b6206c1-b28f-4636-8952-d8d9edec975d-191001105631-MDTM.jpg?x-oss-process=image/resize,m_fill,w_100,h_100',
-    //           level: 5,
-    //           homeLink: '/21'
-    //         }
-    //       },
-    //       {
-    //         id: '22',
-    //         parentId: '2',
-    //         uid: '4',
-    //         content:
-    //           '回复 <span style="color: var(--u-color-success-dark-2);">@别扰我清梦*ぁ:</span> 看完打了一个哈切。。。会传染。。。[委屈]',
-    //         address: '来自广州',
-    //         likes: 9,
-    //         createTime: '1天前',
-    //         user: {
-    //           username: 'Blizzard',
-    //           avatar:
-    //             'https://static.juzicon.com/user/avatar-3cb86a0c-08e7-4305-9ac6-34e0cf4937cc-180320123405-BCV6.jpg?x-oss-process=image/resize,m_fill,w_100,h_100',
-    //           level: 3,
-    //           homeLink: '/22'
-    //         }
-    //       }
-    //     ]
-    //   }
-    // }
-  ]
+  comments: []
 })
 //获取文件url
 function createObjectURL(blob) {
@@ -320,6 +252,7 @@ section {
     color: #141414;
     font-weight: 400;
     width: 800px;
+
     .review-title {
       display: flex;
       justify-content: flex-start;
@@ -338,7 +271,7 @@ section {
     }
 
     .review-submit {
-      font-weight: 600;
+      // font-weight: 600;
       text-align: center;
       font-size: 1.1em;
     }

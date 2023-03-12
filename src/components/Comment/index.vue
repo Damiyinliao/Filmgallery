@@ -175,7 +175,7 @@ provide('InjectionContentBox', contentBox)
     border-radius: 4px;
     // 设置的边框和内边距的值是包含在width内
     box-sizing: border-box;
-    padding: 0 2.5rem;
+    // padding: 0 2.5rem;
     padding-bottom: 2rem;
     margin-top: 1.5rem;
 
@@ -205,7 +205,7 @@ provide('InjectionContentBox', contentBox)
         padding: 40px 0 16px;
 
         .title {
-            display: flex;
+            display: flex; 
             align-items: center;
             position: relative;
             line-height: 30px;
@@ -222,4 +222,5 @@ html.dark {
     .comment {
         color: #ffffff;
     }
-}</style>
+}
+</style>

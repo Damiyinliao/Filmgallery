@@ -75,7 +75,7 @@ onMounted(() => {
         bottom: -20%;
         padding: 8px 18px;
         border-radius: 12px;
-        font-size: 14px;
+        font-size: 20px;
         color: v-bind('alert.color');
         background-color: v-bind('alert.bgColor');
     }

@@ -1,10 +1,7 @@
 <template>
     <div class="wrapper">
         <aside>
-            <div class="back-btn" @click="router.go(-1)">
-                <img src="@/assets/back-filled.png" style="margin-right: 5px; width: 12px; opacity: 0.8;">
-                返回
-            </div>
+            <BackBtn></BackBtn>
             <div class="film-card card">
                 <img src="@/assets/share.png" alt="" srcset="" class="share">
                 <img :src="filmInfo.film_icon" style="height: 80px;margin-left: 12px;margin-bottom: 20px;">
@@ -69,7 +66,7 @@
            
             <AdCard></AdCard>
         </aside>
-        <Section :card_id="filmInfo.example_card_id"></Section>
+        <Section :card_id="filmInfo.example_card_id" :fname="filmInfo.film_ename"></Section>
     </div>
     <router-view v-slot="{ Component }">
         <transition name="bounce">
@@ -97,12 +94,6 @@ onMounted(()=>{
 const filmInfo = computed(()=>{
     return store.state.film.filmInfo
 })
-// const toInfoCard = (card_id) => {
-//     router.push({
-//         name: 'card2',
-//         params: { card_id }
-//     })
-// }
 </script>
 
 <style scoped lang="less">

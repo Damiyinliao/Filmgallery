@@ -28,19 +28,24 @@
 </template>
 <script setup>
 import { useStore } from 'vuex';
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import emitter from '@/utils/eventBus'
 import { useRouter } from 'vue-router';
 import RenderLogin from '../Login';
 import { removeGlobalNode } from "@/utils/dom";
+import { getToken } from "@/utils"
 const store = useStore();
 const router = useRouter();
+// let headPortraitUrl = ref('	http://img.filmgallery.cn/head-portrait/default-account-img.png');
 const headPortraitUrl = computed(() => {
     return store.state.user.userInfo.avatar;
 });
 // 检查状态，是否有账户信息，没有就登录，有就跳到账户页
+// 检查是否存在token
 const checkStatus = () => {
-    if (store.state.user.userInfo._id) {
+    console.log(1);
+    if (getToken()) {
+        console.log(2);
         router.push({
             name: 'account'
         })
@@ -61,6 +66,12 @@ emitter.on("closeLogin1", () => {
 emitter.on("getLoginInfo", (info) => {
     store.dispatch("user/getUserInfo", info);
 })
+// onMounted(()=>{
+//     let userInfo = localStorage.getItem('userInfo');
+//     if(userInfo){
+//         headPortraitUrl.value = userInfo.avatar;
+//     }
+// })
 </script>
 
 <style scoped lang="less">

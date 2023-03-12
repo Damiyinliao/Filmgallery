@@ -46,12 +46,18 @@
 
 <script setup>
 import { ref, computed, onMounted,  onBeforeUnmount } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 const router = useRouter();
+const route = useRoute();
 const store = useStore();
+console.log(route.name);
 const user = computed(() => {
-  return store.state.user.userInfo
+  if(route.name == 'account'){
+    return store.state.user.userInfo;
+  }else{
+    return store.state.user.otherUserInfo;
+  }  
 })
 const showLikes = ref(false);
 // 要展示的卡片，是自己制作的还是自己收藏喜欢的

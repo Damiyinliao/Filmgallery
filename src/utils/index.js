@@ -92,4 +92,11 @@ export const useEmojiParse = (allEmoji, val) => {
   })
   return val
 }
-
+// 获取在localStorage中的token
+export const getToken = () => {
+  return localStorage.getItem('token');
+}
+// 获取在localStorage中的userinfo中的user_id
+export const getUserId = () => {
+  return localStorage.getItem('userInfo')
+}
