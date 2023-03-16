@@ -6,13 +6,26 @@
         </div>
         <Formula :formula="formula"></Formula>
         <Photo :photos="photos"></Photo>
+        <!-- <div class="comment"> -->
+             <Comment 
+                :config="config" 
+                :show-size="2" 
+                @submit="submit" 
+                @like="like" 
+                @remove="remove" 
+                @report="report">
+            </Comment>
+        <!-- </div>        -->
     </section>
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { computed, reactive } from "vue"
 import Formula from './formula.vue';
 import Photo from './photo.vue';
+import { submit, like, remove, report, commentData } from '@/utils/comment';
+// 虚假评论信息数据
+const config = reactive(commentData);
 const props = defineProps(['recipe'])
 const formula = computed(()=>{
     return props.recipe.formula || []
@@ -20,6 +33,7 @@ const formula = computed(()=>{
 const photos = computed(()=>{
     return props.recipe.photos || []
 })
+
 </script>
 
 <style lang="less" scoped>
@@ -38,5 +52,8 @@ section {
         margin-left: 10px;
         font-size: 20px;
     }
+}
+.comment{
+    padding: 20px;
 }
 </style>

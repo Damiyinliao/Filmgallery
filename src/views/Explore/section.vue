@@ -2,11 +2,11 @@
     <section class="card-item">
         <el-image :src=card.photos[0].url :key="card.photos[0].url" @click="emit('showCard', card._id)" lazy fit="contain" />
         <div class="footer">
-            <a href="" class="title">
+            <a class="title">
                 <span>{{ card.card_title }}</span>
             </a>
             <div class="author-wrapper">
-                <router-link class="author" :to="{ name: 'user', params: { username: card.username }}">
+                <router-link class="author" :to="{ name: 'user', params: { username: card.username } }">
                     <img :src=card.user_avatar class="author-avator">
                     <span class="name">{{ card.nickname }}</span>
                 </router-link>
@@ -25,9 +25,9 @@ import { computed, ref } from "vue"
 import { ElImage } from "element-plus";
 import 'element-plus/es/components/image/style/css'
 const props = defineProps({
-    info:Object
+    info: Object
 })
-const card = computed(()=>{
+const card = computed(() => {
     return props.info
 })
 const emit = defineEmits(['showCard']);
@@ -37,18 +37,18 @@ const isLiked = ref(false);
 const giveALike = (id) => {
     isLiked.value = !isLiked.value;
     // 点赞成功，
-    if(isLiked.value == true){
-        card.value.like ++;
+    if (isLiked.value == true) {
+        card.value.like++;
         console.log("点赞", id);
     }
-    if(isLiked.value == false){
-        card.value.like --;
+    if (isLiked.value == false) {
+        card.value.like--;
         console.log("取消点赞");
     }
 }
 // 通过nickname查找用户并去他的个人页
 const toAuthorPage = (nickname) => {
-    
+
 }
 </script>
 

@@ -28,15 +28,15 @@
             <div class="film-details card">
                 <div class="details-head">
                     <span>Details</span>
-                    <img src="./images/help.png" >
+                    <img src="./images/help.png">
                 </div>
                 <ul>
                     <li>
-                        <img src="./images/test-tube.png" >
+                        <img src="./images/test-tube.png">
                         <span>{{ filmInfo.film_process }}</span>
                     </li>
                     <li>
-                        <img src="./images/iso.png" >
+                        <img src="./images/iso.png">
                         <span>{{ filmInfo.film_iso }}</span>
                     </li>
                     <li>
@@ -63,7 +63,7 @@
                     </li>
                 </ul>
             </div>
-           
+
             <AdCard></AdCard>
         </aside>
         <Section :card_id="filmInfo.example_card_id" :fname="filmInfo.film_ename"></Section>
@@ -77,40 +77,53 @@
 
 <script setup>
 import Section from './Section.vue'
-import { computed, onBeforeMount, reactive, onMounted} from 'vue';
+import { computed, onBeforeMount, reactive, onMounted, provide } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 
 const route = useRoute();
 const router = useRouter();
-const store = useStore(); 
-const key = computed(()=>{
+const store = useStore();
+const key = computed(() => {
     route.fullPath;
 })
-onMounted(()=>{
+onMounted(() => {
     let filmId = route.params.id;
     store.dispatch("film/getFilmInfo", filmId);
 })
-const filmInfo = computed(()=>{
+const filmInfo = computed(() => {
     return store.state.film.filmInfo
 })
+
+const toInfoCard = (card_id) => {
+    store
+    router.push({
+        name: 'card2',
+        params: { card_id }
+    })
+}
+provide('showInfoCard', toInfoCard);
 </script>
 
 <style scoped lang="less">
 .bounce-enter-active {
     animation: bounce-in 0.4s;
 }
-.bounce-leave-active{
+
+.bounce-leave-active {
     animation: bounce-in 0.4s reverse;
 }
+
 @keyframes bounce-in {
     0% {
         transform: scale(0);
     }
+
     100% {
         transform: scale(1);
     }
 }
+
 .wrapper {
     display: flex;
     justify-content: space-around;
@@ -273,6 +286,5 @@ aside {
         }
     }
 
-     
-}
-</style>
+
+}</style>

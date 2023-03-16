@@ -1,7 +1,7 @@
 <template>
     <div id="container">
         <div class="carousel-bg">
-            <img src="./images/friends.jpeg" alt="首页图片">
+            <img src="https://www.filmtypes.com/_nuxt/img/bg_hero-comp.1ef8ec7.jpg" alt="首页图片">
         </div>
         <div class="content">
             <div class="middle-wrapper">
@@ -33,7 +33,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-
+        overflow: hidden;
         img {
             width: 100%;
         }

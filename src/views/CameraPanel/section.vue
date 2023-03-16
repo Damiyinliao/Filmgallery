@@ -15,20 +15,30 @@
                 <span>用户评论</span>
             </div>
             <div class="review-submit">
-                <p>What do you think about the <span style="font-weight: 700;">Fuji C200</span>?</p>
-                <p style="font-size: 0.8em; opacity: 0.8;"> 🖼️ Want to submit a photo?</p>
+                <p>留下你对<span style="font-weight: 700;">{{ props.name }}</span>的看法</p>
             </div>
             <div class="review-box">
-                <div class="comment-box">
-
-                </div>
+                <Comment 
+                    :config="config" 
+                    :show-size="2" 
+                    @submit="submit" 
+                    @like="like" 
+                    @remove="remove" 
+                    @report="report">
+                </Comment>
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
-import { } from "vue"
+import { reactive } from "vue"
+import { submit, like, remove, report, commentData } from '@/utils/comment';
+// 虚假评论信息数据
+const config = reactive(commentData);
+const props = defineProps({
+    name:String
+})
 </script>
 
 <style lang="less" scoped>
@@ -107,16 +117,6 @@ section {
         .review-box {
             margin: auto;
             max-width: 100%;
-
-            .comment-box {
-                border-radius: 20px;
-                box-shadow: 0px 2px 10px 1px rgb(0 52 102 / 11%);
-                border: 0px solid #aaaaaa;
-                background-color: #ffffff;
-                color: #111111;
-                margin: auto;
-                margin-top: 20px;
-            }
         }
     }
 }

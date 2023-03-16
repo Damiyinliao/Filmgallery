@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted,  onBeforeUnmount, provide } from 'vue';
+import { ref, computed, onMounted,  onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 const router = useRouter();
@@ -71,7 +71,6 @@ const toInfoCard = (card_id) => {
         params: { card_id }
     })
 }
-provide('showInfoCard', toInfoCard)
 </script>
 
 <style scoped lang="less">

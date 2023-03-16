@@ -60,7 +60,7 @@
                 </div>
             </div>
         </aside>
-        <Section>
+        <Section :name="camera.eur_name">
             <div v-for="item in camera.intro_card_id">
                 <SCard :card_id="item._id" @click="toInfoCard(item._id)"></SCard>
             </div>

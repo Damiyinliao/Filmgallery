@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     SCard: typeof import('./src/components/SCard/index.vue')['default']
     SearchBox: typeof import('./src/components/SearchBox/index.vue')['default']
     Selecter: typeof import('./src/components/Selecter/index.vue')['default']
+    Skeleton: typeof import('./src/components/Skeleton/skeleton.vue')['default']
     Toast: typeof import('./src/components/Toast/index.vue')['default']
     UserInfo: typeof import('./src/components/Comment/UserInfo.vue')['default']
   }

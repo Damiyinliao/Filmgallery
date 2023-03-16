@@ -43,9 +43,7 @@ const headPortraitUrl = computed(() => {
 // 检查状态，是否有账户信息，没有就登录，有就跳到账户页
 // 检查是否存在token
 const checkStatus = () => {
-    console.log(1);
     if (getToken()) {
-        console.log(2);
         router.push({
             name: 'account'
         })

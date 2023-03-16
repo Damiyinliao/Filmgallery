@@ -49,7 +49,16 @@ const routes = [
             {
                 name: 'card2',
                 path: 'card/:card_id',
-                component: () => import('@/views/Card')
+                component: () => import('@/views/Card'),
+                beforeEnter: (to, from, next) => {
+                    let card_id = to.params.card_id;
+                    if(card_id){
+                        store.dispatch("card/getCardInfo", card_id)
+                        .then(() => {
+                            next();
+                        })
+                    }
+                }
             }
         ]
     },
@@ -76,7 +85,16 @@ const routes = [
             {
                 name: 'card3',
                 path: 'card/:card_id',
-                component: () => import('@/views/Card')
+                component: () => import('@/views/Card'),
+                beforeEnter: (to, from, next) => {
+                    let card_id = to.params.card_id;
+                    if(card_id){
+                        store.dispatch("card/getCardInfo", card_id)
+                        .then(() => {
+                            next();
+                        })
+                    }
+                }
             }
         ]
     },
@@ -105,7 +123,7 @@ const routes = [
                 console.log("没有请求");
                 next()
             } else {
-                if (token && _id) {
+                if (token && _id) {  
                     console.log("请求了");
                     //查询用户信息
                     store.dispatch("user/getUserInfo", _id)
@@ -122,14 +140,23 @@ const routes = [
             {
                 name: 'card4',
                 path: 'card/:card_id',
-                component: () => import('@/views/Card')
+                component: () => import('@/views/Card'),
+                beforeEnter: (to, from, next) => {
+                    let card_id = to.params.card_id;
+                    if(card_id){
+                        store.dispatch("card/getCardInfo", card_id)
+                        .then(() => {
+                            next();
+                        })
+                    }
+                }
             }
         ]
     },
     {
         name: 'user',
         path: '/user/:username',    //通过username找到用户的主页
-        component: () => import('@/views/Account'),
+        component: () => import('@/views/Account/user'),
         // 在导航完成前获取数据
         beforeEnter: (to, from, next) => {
             store.dispatch("user/getOtherUserInfo", to.params.username)

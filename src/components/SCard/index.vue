@@ -3,9 +3,14 @@
   <div class="card-item">
     <el-image :src="cardInfo.photo_url" :key="cardInfo.photo_url" lazy fit="contain" />
     <div class="footer">
-      <a href="" class="title"><span>{{ cardInfo.card_title }}</span></a>
+      <a href="javascript:void(0)" class="title">
+        <span>{{ cardInfo.card_title }}</span>
+      </a>
       <div class="author-wrapper">
-        <a href=""><img :src="cardInfo.user_avatar"><span class="name">{{ cardInfo.nickname }}</span></a>
+        <div class="author">
+          <img :src="cardInfo.user_avatar">
+          <span class="name">{{ cardInfo.nickname }}</span>
+        </div>
         <span class="like-wrapper">
           <img src="@/assets/empty-heart.svg">
           <span class="count">{{ cardInfo.like }}</span>
@@ -16,7 +21,7 @@
 </template>
 
 <script setup>
-import { defineProps, onBeforeMount, reactive, inject, watch } from "vue"
+import { defineProps, onBeforeMount, reactive, watch, inject } from "vue"
 import { ElImage } from "element-plus";
 import 'element-plus/es/components/image/style/css'
 const $API = inject("$API");
@@ -27,29 +32,23 @@ let cardInfo = reactive({
   card_title: "好运连连",
   nickname: "Ddo",
   user_avatar: "http://img.filmgallery.cn/avatar/63f588fba1ed9e504406a03c.webp",
-  like: 99
+  like: 99,
+  id: null
 })
-function getCardInfo( c ) {
+function getCardInfo(c) {
   let res = $API.reqCardInfo(c);
   return res;
 }
-onBeforeMount(async () => {
+
+watch(() => props.card_id, async () => {
   let res = await getCardInfo(props.card_id);
   cardInfo.photo_url = res.data.photos[0].url || null;
   cardInfo.card_title = res.data.card_title;
   cardInfo.nickname = res.data.nickname;
   cardInfo.user_avatar = res.data.user_avatar;
-  cardInfo.like = res.data.like
-})
-// watch(() => props.card_id,
-//   (newValue, oldValue) => {
-//     let data = getCardInfo(newValue);
-//     cardInfo.photo_url = data.photos[0].url || null;
-//     cardInfo.card_title = data.card_title;
-//     cardInfo.nickname = data.nickname;
-//     cardInfo.user_avatar = data.user_avatar;
-//     cardInfo.like = data.like
-//   }, { immediate: true })
+  cardInfo.like = res.data.like,
+  cardInfo.id = res.data._id;
+}, { immediate: true })
 </script>
 
 <style lang="less" scoped>
@@ -61,6 +60,7 @@ onBeforeMount(async () => {
   border-radius: 5px;
   transition: all .1s ease;
   overflow: hidden;
+
   .el-image {
     cursor: pointer;
     height: 288px;
@@ -92,10 +92,9 @@ onBeforeMount(async () => {
       font-size: 12px;
       transition: color 1s;
 
-      a {
+      .author {
         display: flex;
-        align-items: center;
-        color: inherit;
+        cursor: pointer;
 
         img {
           margin-right: 6px;
@@ -105,6 +104,8 @@ onBeforeMount(async () => {
           border: 0.5px solid #e6e6e6;
         }
       }
+
+
 
       .like-wrapper {
         height: 20px;
